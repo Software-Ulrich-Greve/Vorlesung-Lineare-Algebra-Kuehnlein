@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35707.178 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vorlesung-Lineare-Algebra-Kuehnlein", "Vorlesung-Lineare-Algebra-Kuehnlein\Vorlesung-Lineare-Algebra-Kuehnlein.csproj", "{6D835F97-B0C4-4D6A-BB66-C72AFA7A3233}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mengen", "Mengen\Mengen\Mengen.csproj", "{7003D595-0A56-4A1D-8CAF-317A6DF4D314}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mengen", "Mengen\Mengen.csproj", "{5B0BAA3D-2329-4C57-95E4-8777754438EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{6D835F97-B0C4-4D6A-BB66-C72AFA7A3233}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D835F97-B0C4-4D6A-BB66-C72AFA7A3233}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D835F97-B0C4-4D6A-BB66-C72AFA7A3233}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7003D595-0A56-4A1D-8CAF-317A6DF4D314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7003D595-0A56-4A1D-8CAF-317A6DF4D314}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7003D595-0A56-4A1D-8CAF-317A6DF4D314}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7003D595-0A56-4A1D-8CAF-317A6DF4D314}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B0BAA3D-2329-4C57-95E4-8777754438EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B0BAA3D-2329-4C57-95E4-8777754438EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B0BAA3D-2329-4C57-95E4-8777754438EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B0BAA3D-2329-4C57-95E4-8777754438EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
