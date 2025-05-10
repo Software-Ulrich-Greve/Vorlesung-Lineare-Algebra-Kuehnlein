@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vorlesung-Lineare-Algebra-K
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mengen", "Mengen\Mengen.csproj", "{5B0BAA3D-2329-4C57-95E4-8777754438EA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F7FFA903-91A1-4E8E-9863-8673C27C8D71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Mengen", "Tests\Tests.Mengen\Tests.Mengen.csproj", "{583B3D66-4980-4CF4-8FAE-272B184C1D0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,15 @@ Global
 		{5B0BAA3D-2329-4C57-95E4-8777754438EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B0BAA3D-2329-4C57-95E4-8777754438EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B0BAA3D-2329-4C57-95E4-8777754438EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{583B3D66-4980-4CF4-8FAE-272B184C1D0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{583B3D66-4980-4CF4-8FAE-272B184C1D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{583B3D66-4980-4CF4-8FAE-272B184C1D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{583B3D66-4980-4CF4-8FAE-272B184C1D0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{583B3D66-4980-4CF4-8FAE-272B184C1D0C} = {F7FFA903-91A1-4E8E-9863-8673C27C8D71}
 	EndGlobalSection
 EndGlobal

@@ -15,6 +15,11 @@
             throw new NotImplementedException();
         }
 
+        public override AbstractMenge<AbstractMenge<decimal>> LeereMengeDerTeilmengen()
+        {
+            throw new NotImplementedException();
+        }
+
         public new bool HatElement(decimal element)
         {
             return true;

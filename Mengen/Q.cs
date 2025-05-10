@@ -15,7 +15,12 @@
             throw new NotImplementedException();
         }
 
-        public new bool HatElement(int element)
+        public override AbstractMenge<AbstractMenge<Bruch>> LeereMengeDerTeilmengen()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HatElement(int element)
         {
             return true;
         }
