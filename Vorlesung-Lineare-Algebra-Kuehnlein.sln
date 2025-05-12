@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vorlesung-Lineare-Algebra-Kuehnlein", "Vorlesung-Lineare-Algebra-Kuehnlein\Vorlesung-Lineare-Algebra-Kuehnlein.csproj", "{6D835F97-B0C4-4D6A-BB66-C72AFA7A3233}"
 EndProject
@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mengen", "Mengen\Mengen.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F7FFA903-91A1-4E8E-9863-8673C27C8D71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Mengen", "Tests\Tests.Mengen\Tests.Mengen.csproj", "{583B3D66-4980-4CF4-8FAE-272B184C1D0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Mengen", "Tests\Tests.Mengen\Tests.Mengen.csproj", "{BF210D65-F115-45ED-AEED-014150D01D2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Console", "Tests\Tests.Console\Tests.Console.csproj", "{82B983DE-108E-44C9-9F7E-303DF7076CC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,15 +27,23 @@ Global
 		{5B0BAA3D-2329-4C57-95E4-8777754438EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B0BAA3D-2329-4C57-95E4-8777754438EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B0BAA3D-2329-4C57-95E4-8777754438EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{583B3D66-4980-4CF4-8FAE-272B184C1D0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{583B3D66-4980-4CF4-8FAE-272B184C1D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{583B3D66-4980-4CF4-8FAE-272B184C1D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{583B3D66-4980-4CF4-8FAE-272B184C1D0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF210D65-F115-45ED-AEED-014150D01D2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF210D65-F115-45ED-AEED-014150D01D2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF210D65-F115-45ED-AEED-014150D01D2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF210D65-F115-45ED-AEED-014150D01D2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82B983DE-108E-44C9-9F7E-303DF7076CC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82B983DE-108E-44C9-9F7E-303DF7076CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82B983DE-108E-44C9-9F7E-303DF7076CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82B983DE-108E-44C9-9F7E-303DF7076CC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{583B3D66-4980-4CF4-8FAE-272B184C1D0C} = {F7FFA903-91A1-4E8E-9863-8673C27C8D71}
+		{BF210D65-F115-45ED-AEED-014150D01D2A} = {F7FFA903-91A1-4E8E-9863-8673C27C8D71}
+		{82B983DE-108E-44C9-9F7E-303DF7076CC3} = {F7FFA903-91A1-4E8E-9863-8673C27C8D71}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E925351-AE40-4C2D-8543-57BDA8509097}
 	EndGlobalSection
 EndGlobal

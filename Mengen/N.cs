@@ -15,7 +15,7 @@
             throw new NotImplementedException();
         }
 
-        public override AbstractMenge<AbstractMenge<int>> LeereMengeDerTeilmengen()
+        public override AbstractMengeDerMengen<int> LeereMengeDerTeilmengen()
         {
             throw new NotImplementedException();
         }

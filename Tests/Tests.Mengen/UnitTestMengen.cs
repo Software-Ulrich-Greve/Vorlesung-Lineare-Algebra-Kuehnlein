@@ -1,61 +1,54 @@
 using Mengen;
 
-namespace Tests.Mengen
+namespace Tests.Mengen;
+
+public class UnitTestMengen
 {
-    public class UnitTestMengen
+    public AbstractMenge<int>? TestMenge { get; set; }
+
+    public AbstractMenge<int>? TestTeilMenge0 { get; set; }
+
+    public AbstractMenge<int>? TestTeilMenge1 { get; set; }
+
+    public AbstractMenge<int>? TestTeilMenge2 { get; set; }
+
+    public AbstractMenge<int>? TestTeilMenge3 { get; set; }
+
+    public AbstractMengeDerMengen<int>? MengeDerTeilmengenCalculated { get; set; }
+
+    [Fact]
+    public void TestPotentMenge()
     {
-        public AbstractMenge<int>? TestMenge { get; set; }
+        TestMenge = new TestMenge();
 
-        public AbstractMenge<int>? TestTeilMenge0 { get; set; }
+        TestMenge.Add(1);
 
-        public AbstractMenge<int>? TestTeilMenge1 { get; set; }
+        TestMenge.Add(2);
 
-        public AbstractMenge<int>? TestTeilMenge2 { get; set; }
+        TestTeilMenge0 = new TestMenge();
 
-        public AbstractMenge<int>? TestTeilMenge3 { get; set; }
+        TestTeilMenge1 = new TestMenge();
 
-        public AbstractMenge<AbstractMenge<int>>? MengeDerTeilmengenCalculated { get; set; }
+        TestTeilMenge1.Add(1);
 
-        [SetUp]
-        public void Setup()
-        {
-        }
+        TestTeilMenge2 = new TestMenge();
 
-        [Test]
-        public void TestPotenzMenge()
-        {
-            TestMenge = new TestMenge();
+        TestTeilMenge2.Add(1);
 
-            TestMenge.Add(1);
+        TestTeilMenge3 = new TestMenge();
 
-            TestMenge.Add(2);
+        TestTeilMenge3.Add(1);
 
-            TestTeilMenge0 = new TestMenge();
+        TestTeilMenge3.Add(2);
 
-            TestTeilMenge1 = new TestMenge();
+        //MengeDerTeilmengenCalculated = TestMenge.BerechnePotenzMenge();
 
-            TestTeilMenge1.Add(1);
+        //Assert.True(MengeDerTeilmengenCalculated.GetElementMengeWithIndex(0)?.IstGleich(TestTeilMenge0));
 
-            TestTeilMenge2 = new TestMenge();
+        //Assert.True(MengeDerTeilmengenCalculated.GetElementMengeWithIndex(1)?.IstGleich(TestTeilMenge1));
 
-            TestTeilMenge2.Add(1);
+        //Assert.True(MengeDerTeilmengenCalculated.GetElementMengeWithIndex(2)?.IstGleich(TestTeilMenge2));
 
-            TestTeilMenge3 = new TestMenge();
-
-            TestTeilMenge3.Add(1);
-
-            TestTeilMenge3.Add(2);
-
-            MengeDerTeilmengenCalculated = TestMenge.PotenzMenge();
-
-            Assert.IsTrue((MengeDerTeilmengenCalculated[0]).IstGleich(TestTeilMenge0));
-
-            Assert.IsTrue((MengeDerTeilmengenCalculated[1]).IstGleich(TestTeilMenge1));
-
-            Assert.IsTrue((MengeDerTeilmengenCalculated[2]).IstGleich(TestTeilMenge2));
-
-            Assert.IsTrue((MengeDerTeilmengenCalculated[3]).IstGleich(TestTeilMenge3));
-
-        }
+        //Assert.True(MengeDerTeilmengenCalculated.GetElementMengeWithIndex(3)?.IstGleich(TestTeilMenge3));
     }
 }

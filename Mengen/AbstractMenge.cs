@@ -1,4 +1,6 @@
-﻿namespace Mengen
+﻿using Mengen.Interfaces;
+
+namespace Mengen
 {
     public abstract class AbstractMenge<E> :
         List<E>,
@@ -8,12 +10,12 @@
         Interfaces.ILeereMenge<E>,
         Interfaces.IKardinalitaet,
         Interfaces.IHatElement<E>,
+        Interfaces.IIstElementMengeVon<E>,
         Interfaces.IIstTeilmengeVon<AbstractMenge<E>>,
         Interfaces.IIstGleich<AbstractMenge<E>>,
         Interfaces.IDurchschnitt<AbstractMenge<E>>,
         Interfaces.IVereinigung<AbstractMenge<E>>,
-        Interfaces.IDifferenzMenge<AbstractMenge<E>>,
-        Interfaces.IPotentMenge<AbstractMenge<AbstractMenge<E>>>
+        Interfaces.IDifferenzMenge<AbstractMenge<E>>
         where E : IEquatable<E>
     {
         public abstract bool IstEndlich { get; }
@@ -22,7 +24,9 @@
 
         public abstract AbstractMenge<E> LeereMenge();
 
-        public abstract AbstractMenge<AbstractMenge<E>> LeereMengeDerTeilmengen();
+        public abstract AbstractMengeDerMengen<E> LeereMengeDerTeilmengen();
+
+        public AbstractMengeDerMengen<E> Potenzmenge { get; set; }
 
         public int? Kardinalitaet()
         {
@@ -47,7 +51,7 @@
             return false;
         }
 
-        public bool IstElementVon(AbstractMenge<AbstractMenge<E>> menge)
+        public bool IstElementMengeVon(AbstractMengeDerMengen<E> menge)
         {
             foreach (AbstractMenge<E> m in menge)
             {
@@ -134,56 +138,130 @@
             return differenzMenge;
         }
 
-        public AbstractMenge<AbstractMenge<E>> PotenzMenge()
+        public new string ToString()
         {
-            AbstractMenge<AbstractMenge<E>> potenzMenge = LeereMengeDerTeilmengen();
+            string ausgabe = "{";
 
-            return PotenzmengenRekursion(potenzMenge, null, 0);
+            for (int i = 0; i < Count; i++)
+            {
+                ausgabe += ToArray()[i].ToString();
+
+                if (i < Count - 1)
+                {
+                    ausgabe += ";";
+                }
+            }
+
+            ausgabe += "}";
+
+            return ausgabe;
         }
 
-        public AbstractMenge<AbstractMenge<E>> PotenzmengenRekursion(AbstractMenge<AbstractMenge<E>> potenzMenge, E[]? iterationsElemente, int k)
+        public void BerechnePotenzMenge()
         {
-            if (k > Count)
+            Potenzmenge = LeereMengeDerTeilmengen();
+
+            if (Kardinalitaet == null)
             {
-                return potenzMenge;
+                return;
             }
+
+            for (int kardinalitaet = 0; kardinalitaet <= Count; kardinalitaet++)
+            {
+                Console.WriteLine();
+
+                Console.WriteLine("---------------------------------> Kardinalitaet: " + kardinalitaet);
+
+                if (kardinalitaet == 0)
+                {
+                    Potenzmenge.Add(LeereMenge());
+
+                    Console.WriteLine();
+
+                    Console.Write("----------");
+
+                    Console.Write(Potenzmenge.ToString());
+
+                    Console.WriteLine("----------");
+
+                    continue;
+                }
+
+                PotenzmengenRekursion(LeereMenge(), 1, kardinalitaet);
+            }
+
+            Console.WriteLine("=================================");
+
+            Console.WriteLine();
+
+            Console.Write("----------");
+
+            Console.Write(Potenzmenge.ToString());
+
+            Console.WriteLine("----------");
+        }
+
+        public void AddTeilmenge(AbstractMenge<E> teilmenge, E e, int kardinalitaet)
+        {
+            if (teilmenge.Count.Equals(kardinalitaet))
+            {
+                if (!teilmenge.IstElementMengeVon(Potenzmenge))
+                {
+                    Potenzmenge.Add(teilmenge.Copy());
+
+                    Console.WriteLine();
+
+                    Console.Write("----------");
+
+                    Console.Write(Potenzmenge.ToString());
+
+                    Console.WriteLine("----------");
+                }
+
+                teilmenge.Remove(e);
+            }
+        }
+
+        public void PotenzmengenRekursion(AbstractMenge<E> teilmenge, int schleifen, int kardinalitaet)
+        {
+            if (schleifen > kardinalitaet)
+            {
+                return;
+            }
+
+            int index = 1;
+
+            AbstractMenge<E> schleifenTeilmenge = LeereMenge();
 
             foreach (E e in this)
             {
-                AbstractMenge<E> m = LeereMenge();
-
-                E[] naechsteIterationsElemente;
-
-                if (iterationsElemente != null)
+                if (!schleifenTeilmenge.HatElement(e) &&
+                    index > schleifen)
                 {
-                    for (int i = 0; i < k; i++)
-                    {
-                        if (!m.HatElement(iterationsElemente[i]))
-                        {
-                            m.Add(iterationsElemente[i]);
-                        }
-                    }
-
-                    naechsteIterationsElemente = iterationsElemente;
-
-                    naechsteIterationsElemente[k] = e;
-                }
-                else
-                {
-                    naechsteIterationsElemente = new E[1];
-
-                    naechsteIterationsElemente[0] = e;
+                    schleifenTeilmenge.Add(e);
                 }
 
-                if (!m.IstElementVon(potenzMenge))
+                if (!teilmenge.HatElement(e))
                 {
-                    potenzMenge.Add(m);
+                    teilmenge.Add(e);
                 }
 
-                AbstractMenge<AbstractMenge<E>> naechstePotenzMenge = PotenzmengenRekursion(potenzMenge, naechsteIterationsElemente, k + 1);
+                Console.Write("i" + index + "s" + schleifen + teilmenge.ToString());
+
+                Console.Write(".");
+
+                AddTeilmenge(schleifenTeilmenge, e, kardinalitaet);
+
+                AddTeilmenge(teilmenge, e, kardinalitaet);
+
+                PotenzmengenRekursion(teilmenge.Copy(), schleifen + 1, kardinalitaet);
+
+                Console.WriteLine();
+
+                Console.WriteLine($"s({schleifen});i({index})");
+
+                index++;
             }
-
-            return potenzMenge;
         }
 
         public new void Add(E element)
@@ -196,9 +274,23 @@
             base.Remove(element);
         }
 
+        public AbstractMenge<E> Copy()
+        {
+            AbstractMenge<E> copy = LeereMenge();
+
+            foreach (E element in this)
+            {
+                copy.Add(element);
+            }
+
+            return copy;
+        }
+
         public bool Equals(AbstractMenge<E>? other)
         {
-            return base.Equals(other);
+            if (other == null) return false;
+
+            return IstGleich(other);
         }
     }
 }
