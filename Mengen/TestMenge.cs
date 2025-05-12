@@ -18,7 +18,7 @@
 
         public override AbstractMenge<AbstractMenge<int>> LeereMengeDerMengen()
         {
-            return new MengeDerTestMengen();
+            return new MengeDerTestMengen().LeereMenge();
         }
     }
 }

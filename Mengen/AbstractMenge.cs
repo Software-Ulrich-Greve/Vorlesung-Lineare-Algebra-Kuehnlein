@@ -6,6 +6,7 @@
         Interfaces.IEndlichkeit,
         Interfaces.IAbzaehlbarkeit,
         Interfaces.ILeereMenge<T>,
+        Interfaces.ILeereMengeDerMengen<AbstractMenge<T>>,
         Interfaces.IKardinalitaet,
         Interfaces.IHatElement<T>,
         Interfaces.IIstElementVon<AbstractMenge<T>>,
