@@ -1,7 +1,7 @@
 ﻿namespace Mengen.Interfaces
 {
-    public interface ILeereMengeDerMengen<M> where M : IEquatable<M>
+    public interface ILeereMengeDerMengen<T> where T : IEquatable<T>
     {
-        public AbstractMengeDerMengen<M> LeereMenge();
+        public AbstractMengeDerMengen<T> LeereMenge();
     }
 }

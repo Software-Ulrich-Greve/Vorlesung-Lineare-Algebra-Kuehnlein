@@ -10,5 +10,9 @@
         {
             return new MengeDerTestMengen();
         }
+        public override AbstractMengeBase<AbstractMengeBase<AbstractMengeBase<int>>> LeereMengeDerMengen()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

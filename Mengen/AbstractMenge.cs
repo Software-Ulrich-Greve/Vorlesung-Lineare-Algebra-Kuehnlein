@@ -1,165 +1,29 @@
-﻿using Mengen.Interfaces;
-
-namespace Mengen
+﻿namespace Mengen
 {
     public abstract class AbstractMenge<E> :
-        List<E>,
+        AbstractMengeBase<E>,
         IEquatable<AbstractMenge<E>>,
         Interfaces.IEndlichkeit,
         Interfaces.IAbzaehlbarkeit,
         Interfaces.ILeereMenge<E>,
         Interfaces.IKardinalitaet,
         Interfaces.IHatElement<E>,
-        Interfaces.IIstElementMengeVon<E>,
-        Interfaces.IIstTeilmengeVon<AbstractMenge<E>>,
-        Interfaces.IIstGleich<AbstractMenge<E>>,
-        Interfaces.IDurchschnitt<AbstractMenge<E>>,
-        Interfaces.IVereinigung<AbstractMenge<E>>,
-        Interfaces.IDifferenzMenge<AbstractMenge<E>>
+        Interfaces.IIstElementVon<AbstractMengeBase<E>>,
+        Interfaces.IElementMitIndex<E>,
+        Interfaces.IIstTeilmengeVon<AbstractMengeBase<E>>,
+        Interfaces.IIstGleich<AbstractMengeBase<E>>,
+        Interfaces.IDurchschnitt<AbstractMengeBase<E>>,
+        Interfaces.IVereinigung<AbstractMengeBase<E>>,
+        Interfaces.IDifferenzMenge<AbstractMengeBase<E>>,
+        Interfaces.IToString,
+        Interfaces.IPotenzMenge<AbstractMengeBase<E>>
         where E : IEquatable<E>
     {
-        public abstract bool IstEndlich { get; }
-
-        public abstract bool IstAbzaehlbar { get; }
-
-        public abstract AbstractMenge<E> LeereMenge();
-
-        public abstract AbstractMengeDerMengen<E> LeereMengeDerTeilmengen();
-
-        public AbstractMengeDerMengen<E> Potenzmenge { get; set; }
-
-        public int? Kardinalitaet()
-        {
-            if (!IstEndlich)
-            {
-                return null;
-            }
-
-            return base.Count;
-        }
-
-        public bool HatElement(E element)
-        {
-            foreach (E e in this)
-            {
-                if (e.Equals(element))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public bool IstElementMengeVon(AbstractMengeDerMengen<E> menge)
-        {
-            foreach (AbstractMenge<E> m in menge)
-            {
-                if (IstGleich(m))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public bool IstTeilmengeVon(AbstractMenge<E> menge)
-        {
-            foreach (E e in this)
-            {
-                if (!menge.HatElement(e))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public bool IstGleich(AbstractMenge<E> menge)
-        {
-            if (menge == null)
-            {
-                return false;
-            }
-
-            if (IstTeilmengeVon(menge) &&
-                menge.IstTeilmengeVon(this))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public AbstractMenge<E> Durchschnitt(AbstractMenge<E> menge)
-        {
-            AbstractMenge<E> durchschnitt = LeereMenge();
-
-            foreach (E e in this)
-            {
-                if (!menge.HatElement(e))
-                {
-                    durchschnitt.Add(e);
-                }
-            }
-
-            return durchschnitt;
-        }
-
-        public AbstractMenge<E> Vereinigung(AbstractMenge<E> menge)
-        {
-            AbstractMenge<E> vereinigung = menge;
-
-            foreach (E e in this)
-            {
-                if (!vereinigung.HatElement(e))
-                {
-                    vereinigung.Add(e);
-                }
-            }
-
-            return vereinigung;
-        }
-
-        public AbstractMenge<E> DifferenzMenge(AbstractMenge<E> menge)
-        {
-            AbstractMenge<E> differenzMenge = this;
-
-            foreach (E e in menge)
-            {
-                if (differenzMenge.HatElement(e))
-                {
-                    differenzMenge.Remove(e);
-                }
-            }
-
-            return differenzMenge;
-        }
-
-        public new string ToString()
-        {
-            string ausgabe = "{";
-
-            for (int i = 0; i < Count; i++)
-            {
-                ausgabe += ToArray()[i].ToString();
-
-                if (i < Count - 1)
-                {
-                    ausgabe += ";";
-                }
-            }
-
-            ausgabe += "}";
-
-            return ausgabe;
-        }
+        public AbstractMengeBase<AbstractMengeBase<E>>? Potenzmenge { get; set; }
 
         public void BerechnePotenzMenge()
         {
-            Potenzmenge = LeereMengeDerTeilmengen();
+            Potenzmenge = LeereMengeDerMengen();
 
             if (Kardinalitaet == null)
             {
@@ -201,11 +65,16 @@ namespace Mengen
             Console.WriteLine("----------");
         }
 
-        public void AddTeilmenge(AbstractMenge<E> teilmenge, E e, int kardinalitaet)
+        public void AddTeilmenge(AbstractMengeBase<E> teilmenge, E e, int kardinalitaet)
         {
+            if (Potenzmenge == null)
+            {
+                return;
+            }
+
             if (teilmenge.Count.Equals(kardinalitaet))
             {
-                if (!teilmenge.IstElementMengeVon(Potenzmenge))
+                if (!teilmenge.IstElementVon(Potenzmenge))
                 {
                     Potenzmenge.Add(teilmenge.Copy());
 
@@ -222,7 +91,7 @@ namespace Mengen
             }
         }
 
-        public void PotenzmengenRekursion(AbstractMenge<E> teilmenge, int schleifen, int kardinalitaet)
+        public void PotenzmengenRekursion(AbstractMengeBase<E> teilmenge, int schleifen, int kardinalitaet)
         {
             if (schleifen > kardinalitaet)
             {
@@ -231,7 +100,7 @@ namespace Mengen
 
             int index = 1;
 
-            AbstractMenge<E> schleifenTeilmenge = LeereMenge();
+            AbstractMengeBase<E> schleifenTeilmenge = LeereMenge();
 
             foreach (E e in this)
             {
@@ -272,18 +141,6 @@ namespace Mengen
         public new void Remove(E element)
         {
             base.Remove(element);
-        }
-
-        public AbstractMenge<E> Copy()
-        {
-            AbstractMenge<E> copy = LeereMenge();
-
-            foreach (E element in this)
-            {
-                copy.Add(element);
-            }
-
-            return copy;
         }
 
         public bool Equals(AbstractMenge<E>? other)

@@ -14,7 +14,7 @@ namespace Tests.Console
 
         public AbstractMenge<int>? TestTeilMenge3 { get; set; }
 
-        public AbstractMengeDerMengen<int>? MengeDerTeilmengenCalculated { get; set; }
+        public AbstractMengeBase<AbstractMengeBase<int>>? MengeDerTeilmengenCalculated { get; set; }
 
         public ConsoleTest()
         {

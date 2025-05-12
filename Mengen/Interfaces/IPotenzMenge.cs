@@ -1,7 +1,9 @@
 ﻿namespace Mengen.Interfaces
 {
-    public interface IPotentMenge<M>
+    public interface IPotenzMenge<M> where M : IEquatable<M>
     {
-        public M PotenzMenge();
+        public AbstractMengeBase<M>? Potenzmenge { get; set; }
+
+        public void BerechnePotenzMenge();
     }
 }

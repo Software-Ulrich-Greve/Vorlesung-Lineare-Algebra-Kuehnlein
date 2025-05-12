@@ -76,23 +76,27 @@ namespace Tests.Console
 
             TestMenge.BerechnePotenzMenge();
 
-            bool? b0 = TestMenge.Potenzmenge.GetElementMengeWithIndex(0)?.IstGleich(TestTeilMenge0);
+            if (TestMenge.Potenzmenge != null)
+            {
 
-            bool? b1 = TestMenge.Potenzmenge.GetElementMengeWithIndex(1)?.IstGleich(TestTeilMenge1);
+                bool? b0 = TestMenge.Potenzmenge.GetElementMitIndex(0).IstGleich(TestTeilMenge0);
 
-            bool? b2 = TestMenge.Potenzmenge.GetElementMengeWithIndex(2)?.IstGleich(TestTeilMenge2);
+                bool? b1 = TestMenge.Potenzmenge.GetElementMitIndex(1).IstGleich(TestTeilMenge1);
 
-            bool? b3 = TestMenge.Potenzmenge.GetElementMengeWithIndex(3)?.IstGleich(TestTeilMenge3);
+                bool? b2 = TestMenge.Potenzmenge.GetElementMitIndex(2).IstGleich(TestTeilMenge2);
 
-            bool? b4 = TestMenge.Potenzmenge.GetElementMengeWithIndex(4)?.IstGleich(TestTeilMenge4);
+                bool? b3 = TestMenge.Potenzmenge.GetElementMitIndex(3).IstGleich(TestTeilMenge3);
 
-            bool? b5 = TestMenge.Potenzmenge.GetElementMengeWithIndex(5)?.IstGleich(TestTeilMenge5);
+                bool? b4 = TestMenge.Potenzmenge.GetElementMitIndex(4).IstGleich(TestTeilMenge4);
 
-            bool? b6 = TestMenge.Potenzmenge.GetElementMengeWithIndex(6)?.IstGleich(TestTeilMenge6);
+                bool? b5 = TestMenge.Potenzmenge.GetElementMitIndex(5).IstGleich(TestTeilMenge5);
 
-            bool? b7 = TestMenge.Potenzmenge.GetElementMengeWithIndex(7)?.IstGleich(TestTeilMenge7);
+                bool? b6 = TestMenge.Potenzmenge.GetElementMitIndex(6).IstGleich(TestTeilMenge6);
 
-            bool? bi = null;
+                bool? b7 = TestMenge.Potenzmenge.GetElementMitIndex(7).IstGleich(TestTeilMenge7);
+
+                bool? bi = null;
+            }
         }
     }
 }

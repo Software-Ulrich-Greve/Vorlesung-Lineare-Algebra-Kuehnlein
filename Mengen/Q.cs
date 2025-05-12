@@ -15,7 +15,7 @@
             throw new NotImplementedException();
         }
 
-        public override AbstractMengeDerMengen<Bruch> LeereMengeDerTeilmengen()
+        public override AbstractMengeBase<AbstractMengeBase<Bruch>> LeereMengeDerMengen()
         {
             throw new NotImplementedException();
         }

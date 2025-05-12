@@ -16,7 +16,7 @@
             return new TestMenge();
         }
 
-        public override AbstractMengeDerMengen<int> LeereMengeDerTeilmengen()
+        public override AbstractMengeBase<AbstractMengeBase<int>> LeereMengeDerMengen()
         {
             return new MengeDerTestMengen();
         }

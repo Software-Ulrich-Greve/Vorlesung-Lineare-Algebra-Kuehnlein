@@ -1,7 +1,7 @@
 ﻿namespace Mengen.Interfaces
 {
-    public interface IHatElementMenge<M> where M : IEquatable<M>
+    public interface IHatElementMenge<T> where T : IEquatable<T>
     {
-        public bool HatElementMenge(M menge);
+        public bool HatElement(AbstractMengeBase<T> menge);
     }
 }
