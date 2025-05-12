@@ -56,6 +56,8 @@ namespace Mengen
                 {
                     return e;
                 }
+
+                i++;
             }
 
             return null;
