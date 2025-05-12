@@ -26,9 +26,9 @@ namespace Tests.Console
 
             TestMenge.Add(3);
 
-            //TestMenge.Add(4);
+            TestMenge.Add(4);
 
-            //TestMenge.Add(5);
+            TestMenge.Add(5);
 
             //TestTeilMenge0 = new TestMenge();
 
