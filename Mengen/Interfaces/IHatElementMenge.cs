@@ -2,6 +2,6 @@
 {
     public interface IHatElementMenge<T> where T : IEquatable<T>
     {
-        public bool HatElement(AbstractMengeBase<T> menge);
+        public bool HatElement(AbstractMenge<T> menge);
     }
 }

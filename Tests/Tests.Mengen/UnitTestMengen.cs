@@ -4,28 +4,28 @@ namespace Tests.Mengen;
 
 public class UnitTestMengen
 {
-    public AbstractMenge<int>? TestMenge { get; set; }
+    public AbstractMenge<int> ? TestMenge { get; set; }
 
-    public AbstractMenge<int>? TestTeilMenge0 { get; set; }
+    public AbstractMenge<int> ? TestTeilMenge0 { get; set; }
 
-    public AbstractMenge<int>? TestTeilMenge1 { get; set; }
+    public AbstractMenge<int> ? TestTeilMenge1 { get; set; }
 
-    public AbstractMenge<int>? TestTeilMenge2 { get; set; }
+    public AbstractMenge<int> ? TestTeilMenge2 { get; set; }
 
-    public AbstractMenge<int>? TestTeilMenge3 { get; set; }
+    public AbstractMenge<int> ? TestTeilMenge3 { get; set; }
 
-    public AbstractMenge<int>? TestTeilMenge4 { get; set; }
+    public AbstractMenge<int> ? TestTeilMenge4 { get; set; }
 
-    public AbstractMenge<int>? TestTeilMenge5 { get; set; }
+    public AbstractMenge<int> ? TestTeilMenge5 { get; set; }
 
-    public AbstractMenge<int>? TestTeilMenge6 { get; set; }
+    public AbstractMenge<int> ? TestTeilMenge6 { get; set; }
 
-    public AbstractMenge<int>? TestTeilMenge7 { get; set; }
+    public AbstractMenge<int> ? TestTeilMenge7 { get; set; }
 
-    public AbstractMengeDerMengen<int>? MengeDerTeilmengenCalculated { get; set; }
+    public AbstractMenge<AbstractMenge<int>>? MengeDerTeilmengenCalculated { get; set; }
 
     [Fact]
-    public void TestPotentMengeKardinalitaet3()
+    public void TestPotenzMengeKardinalitaet3()
     {
         TestMenge = new TestMenge();
 

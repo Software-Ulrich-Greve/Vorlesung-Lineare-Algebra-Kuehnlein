@@ -1,16 +1,16 @@
 ﻿namespace Mengen
 {
-    public class MengeDerTestMengen : AbstractMengeDerMengen<int>
+    public class MengeDerTestMengen : AbstractMenge<AbstractMenge<int>>
     {
         public override bool IstEndlich { get { return true; } }
 
         public override bool IstAbzaehlbar { get { return true; } }
 
-        public override AbstractMengeDerMengen<int> LeereMenge()
+        public override AbstractMenge<AbstractMenge<int>> LeereMenge()
         {
             return new MengeDerTestMengen();
         }
-        public override AbstractMengeBase<AbstractMengeBase<AbstractMengeBase<int>>> LeereMengeDerMengen()
+        public override AbstractMenge<AbstractMenge<AbstractMenge<int>>> LeereMengeDerMengen()
         {
             throw new NotImplementedException();
         }

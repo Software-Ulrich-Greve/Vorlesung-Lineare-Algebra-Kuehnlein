@@ -2,8 +2,8 @@
 {
     public interface ILeereMenge<T> where T : IEquatable<T>
     {
-        public AbstractMengeBase<T> LeereMenge();
+        public AbstractMenge<T> LeereMenge();
 
-        public AbstractMengeBase<AbstractMengeBase<T>> LeereMengeDerMengen();
+        public AbstractMenge<AbstractMenge<T>> LeereMengeDerMengen();
     }
 }

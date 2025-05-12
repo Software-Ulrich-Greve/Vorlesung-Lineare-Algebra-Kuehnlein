@@ -4,17 +4,17 @@ namespace Tests.Console
 {
     public class ConsoleTest
     {
-        public AbstractMenge<int>? TestMenge { get; set; }
+        public AbstractMenge<int> ? TestMenge { get; set; }
 
-        public AbstractMenge<int>? TestTeilMenge0 { get; set; }
+        public AbstractMenge<int> ? TestTeilMenge0 { get; set; }
 
-        public AbstractMenge<int>? TestTeilMenge1 { get; set; }
+        public AbstractMenge<int> ? TestTeilMenge1 { get; set; }
 
-        public AbstractMenge<int>? TestTeilMenge2 { get; set; }
+        public AbstractMenge<int> ? TestTeilMenge2 { get; set; }
 
-        public AbstractMenge<int>? TestTeilMenge3 { get; set; }
+        public AbstractMenge<int> ? TestTeilMenge3 { get; set; }
 
-        public AbstractMengeBase<AbstractMengeBase<int>>? MengeDerTeilmengenCalculated { get; set; }
+        public AbstractMenge<AbstractMenge<int>>? MengeDerTeilmengenCalculated { get; set; }
 
         public ConsoleTest()
         {

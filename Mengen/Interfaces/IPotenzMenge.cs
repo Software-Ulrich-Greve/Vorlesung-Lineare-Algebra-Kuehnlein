@@ -2,7 +2,7 @@
 {
     public interface IPotenzMenge<M> where M : IEquatable<M>
     {
-        public AbstractMengeBase<M>? Potenzmenge { get; set; }
+        public AbstractMenge<M>? Potenzmenge { get; set; }
 
         public void BerechnePotenzMenge();
     }
