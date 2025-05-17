@@ -10,12 +10,12 @@
 
         public override bool IstAbzaehlbar { get { return true; } }
 
-        public override AbstractMenge<decimal> LeereMenge()
+        public override Interfaces.IMenge<decimal> LeereMenge()
         {
             throw new NotImplementedException();
         }
 
-        public override AbstractMenge<AbstractMenge<decimal>> LeereMengeDerMengen()
+        public override Interfaces.IMenge<Interfaces.IMenge<decimal>> LeereMengeDerMengen()
         {
             throw new NotImplementedException();
         }

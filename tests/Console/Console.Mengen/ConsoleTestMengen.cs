@@ -12,7 +12,7 @@
 
         public src.Mengen.AbstractMenge<int> ? TestTeilMenge3 { get; set; }
 
-        public src.Mengen.AbstractMenge<src.Mengen.AbstractMenge<int>>? MengeDerTeilmengenCalculated { get; set; }
+        public src.Mengen.Interfaces.IMenge<src.Mengen.Interfaces.IMenge<int>>? MengeDerTeilmengenCalculated { get; set; }
 
         public ConsoleTestMengen()
         {
