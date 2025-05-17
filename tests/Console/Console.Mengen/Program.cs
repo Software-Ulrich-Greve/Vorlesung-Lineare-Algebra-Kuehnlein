@@ -1,10 +1,4 @@
-﻿namespace Mengen
-{
-    public class Program
-    {
-        private static void Main(string[] args)
-        {
-            new ConsoleTestMengen();
-        }
-    }
-}
+﻿// See https://aka.ms/new-console-template for more information
+using Mengen;
+
+new ConsoleTestMengen();

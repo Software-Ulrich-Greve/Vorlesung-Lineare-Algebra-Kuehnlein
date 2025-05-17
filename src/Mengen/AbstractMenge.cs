@@ -163,7 +163,7 @@
 
             for (int i = 0; i < Count; i++)
             {
-                ausgabe += GetElementMitIndex(i).ToString();
+                ausgabe += ElementMitIndex(i).ToString();
 
                 if (i < Count - 1)
                 {
