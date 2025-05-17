@@ -4,7 +4,14 @@
     {
         private static void Main(string[] args)
         {
-            new ConsoleTestMengen();
+            try
+            {
+                new ConsoleTestMengen();
+            }
+            catch (Exception ex)
+            {
+                var x = 0;
+            }
         }
     }
 }

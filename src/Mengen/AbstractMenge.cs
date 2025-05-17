@@ -1,37 +1,53 @@
 ﻿namespace src.Mengen
 {
     public abstract class AbstractMenge<T> :
-        List<T>,
-        IEquatable<AbstractMenge<T>>,
         IEquatable<Interfaces.IMenge<T>>,
         Interfaces.IEndlichkeit,
         Interfaces.IAbzaehlbarkeit,
-        Interfaces.ILeereMenge<T>,
-        Interfaces.ILeereMengeDerMengen<Interfaces.IMenge<T>>,
+        Interfaces.ILeereMenge<Interfaces.IMenge<T>>,
         Interfaces.IKardinalitaet,
         Interfaces.IHatElement<T>,
-        Interfaces.IIstElementVon<Interfaces.IMenge<T>>,
         Interfaces.IElementMitIndex<T>,
         Interfaces.IIstTeilmengeVon<Interfaces.IMenge<T>>,
         Interfaces.IIstGleich<Interfaces.IMenge<T>>,
         Interfaces.IDurchschnitt<Interfaces.IMenge<T>>,
         Interfaces.IVereinigung<Interfaces.IMenge<T>>,
         Interfaces.IDifferenzMenge<Interfaces.IMenge<T>>,
+        //Interfaces.IIstElementVon<Interfaces.IMenge<Interfaces.IMenge<T>>>,
         Interfaces.IToString,
-        Interfaces.IPotenzMenge<Interfaces.IMenge<T>>,
+        Interfaces.IPotenzMenge<Elemente<T>>,
         Interfaces.ICopy<Interfaces.IMenge<T>>,
         Interfaces.IMenge<T>
-        where T : IEquatable<T>
+        where T : 
+        IEquatable<T>
     {
         public abstract bool IstEndlich { get; }
 
         public abstract bool IstAbzaehlbar { get; }
 
-        public abstract Interfaces.IMenge<T> LeereMenge();
+        public Interfaces.IMenge<T> LeereMenge { get; set; }
 
-        public abstract Interfaces.IMenge<Interfaces.IMenge<T>> LeereMengeDerMengen();
+        public Elemente<T> Elemente { get; set; }
 
-        public Interfaces.IMenge<Interfaces.IMenge<T>>? Potenzmenge { get; set; }
+        public Elemente<Elemente<T>> Potenzmenge { get; set; }
+
+        public AbstractMenge() : base()
+        {
+            Elemente = new Elemente<T>();
+
+            Potenzmenge = new Elemente<Elemente<T>>();
+
+            LeereMenge = this;
+        }
+
+        public Interfaces.IMenge<T> Initialize(Elemente<T> elemente)
+        {
+            Interfaces.IMenge<T> copy = Copy();
+
+            copy.Elemente = elemente;
+
+            return copy;
+        }
 
         public int? Kardinalitaet()
         {
@@ -40,216 +56,109 @@
                 return null;
             }
 
-            return base.Count;
+            return Elemente.Kardinalitaet();
         }
 
-        public bool HatElement(T element)
+        public bool HatElement(T? element)
         {
-            foreach (T t in this)
-            {
-                if (t.Equals(element))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return Elemente.HatElement(element);
         }
 
-        public bool IstElementVon(Interfaces.IMenge<Interfaces.IMenge<T>> menge)
+        public T ElementMitIndex(int index)
         {
-            foreach (Interfaces.IMenge<T> m in menge)
-            {
-                if (IstGleich(m))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return Elemente.ElementMitIndex(index);
         }
 
-        public T GetElementMitIndex(int index)
+        public bool IstTeilmengeVon(Interfaces.IMenge<T>? menge)
         {
-            int i = 0;
-
-            foreach (T t in this)
-            {
-                if (i.Equals(index))
-                {
-                    return t;
-                }
-
-                i++;
-            }
-
-            throw new KeyNotFoundException();
+            return Elemente.IstTeilmengeVon(menge?.Elemente);
         }
 
-        public bool IstTeilmengeVon(Interfaces.IMenge<T> menge)
+        public bool IstGleich(Interfaces.IMenge<T>? menge)
         {
-            foreach (T t in this)
-            {
-                if (!menge.HatElement(t))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return Elemente.IstGleich(menge?.Elemente);
         }
 
-        public bool IstGleich(Interfaces.IMenge<T> menge)
+        public Interfaces.IMenge<T> Durchschnitt(Interfaces.IMenge<T>? menge)
         {
-            if (menge == null)
-            {
-                return false;
-            }
-
-            if (IstTeilmengeVon(menge) &&
-                menge.IstTeilmengeVon((Interfaces.IMenge<T>)this))
-            {
-                return true;
-            }
-
-            return false;
+            return Initialize(Elemente.Durchschnitt(menge?.Elemente));
         }
 
-        public Interfaces.IMenge<T> Durchschnitt(Interfaces.IMenge<T> mengeDerMengen)
+        public Interfaces.IMenge<T> Vereinigung(Interfaces.IMenge<T>? menge)
         {
-            Interfaces.IMenge<T> durchschnitt = LeereMenge();
-
-            foreach (T t in this)
-            {
-                if (!mengeDerMengen.HatElement(t))
-                {
-                    durchschnitt.Add(t);
-                }
-            }
-
-            return durchschnitt;
+            return Initialize(Elemente.Vereinigung(menge?.Elemente));
         }
 
-        public Interfaces.IMenge<T> Vereinigung(Interfaces.IMenge<T> menge)
+        public Interfaces.IMenge<T> DifferenzMenge(Interfaces.IMenge<T>? menge)
         {
-            Interfaces.IMenge<T> vereinigung = menge;
-
-            foreach (T t in this)
-            {
-                if (!vereinigung.HatElement(t))
-                {
-                    vereinigung.Add(t);
-                }
-            }
-
-            return vereinigung;
+            return Initialize(Elemente.DifferenzMenge(menge?.Elemente));
         }
 
-        public Interfaces.IMenge<T> DifferenzMenge(Interfaces.IMenge<T> menge)
-        {
-            Interfaces.IMenge<T> differenzMenge = (Interfaces.IMenge<T>)this;
+        //public bool IstElementVon(Interfaces.IMenge<Interfaces.IMenge<T>>? menge)
+        //{
+        //    if (menge == null)
+        //    {
+        //        return false;
+        //    }
 
-            foreach (T t in this)
-            {
-                if (differenzMenge.HatElement(t))
-                {
-                    differenzMenge.Remove(t);
-                }
-            }
+        //    foreach (Elemente<T> e in menge.Elemente)
+        //    {
+        //        if (Elemente.IstGleich(e))
+        //        {
+        //            return true;
+        //        }
+        //    }
 
-            return differenzMenge;
-        }
+        //    return false;
+        //}
 
         public override string ToString()
         {
-            string ausgabe = "{";
-
-            for (int i = 0; i < Count; i++)
-            {
-                ausgabe += GetElementMitIndex(i).ToString();
-
-                if (i < Count - 1)
-                {
-                    ausgabe += ";";
-                }
-            }
-
-            ausgabe += "}";
-
-            return ausgabe;
+            return Elemente.ToString();
         }
 
         public void BerechnePotenzMenge()
         {
-            Potenzmenge = LeereMengeDerMengen();
-
-            if (Kardinalitaet == null)
+            try
             {
-                return;
-            }
-
-            for (int kardinalitaet = 0; kardinalitaet <= Count; kardinalitaet++)
-            {
-                Console.WriteLine();
-
-                Console.WriteLine("---------------------------------> Kardinalitaet: " + kardinalitaet);
-
-                if (kardinalitaet == 0)
+                if (Kardinalitaet == null ||
+                    Potenzmenge == null)
                 {
-                    Potenzmenge.Add(LeereMenge());
+                    return;
+                }
+
+                for (int kardinalitaet = 0; kardinalitaet <= Elemente.Count; kardinalitaet++)
+                {
+                    Console.WriteLine();
+
+                    Console.WriteLine("Kardinalitaet: " + kardinalitaet);
+
+                    if (kardinalitaet == 0)
+                    {
+                        Potenzmenge.Add(new Elemente<T>());
+
+                        Console.WriteLine();
+
+                        Console.WriteLine(Potenzmenge.ToString());
+
+                        continue;
+                    }
+
+                    PotenzmengenRekursion(new Elemente<T>(), 1, kardinalitaet);
 
                     Console.WriteLine();
 
-                    Console.Write("----------");
-
-                    Console.Write(Potenzmenge.ToString());
-
-                    Console.WriteLine("----------");
-
-                    continue;
+                    Console.WriteLine(Potenzmenge.ToString());
                 }
-
-                PotenzmengenRekursion(LeereMenge(), 1, kardinalitaet);
             }
-
-            Console.WriteLine("=================================");
-
-            Console.WriteLine();
-
-            Console.Write("----------");
-
-            Console.Write(Potenzmenge.ToString());
-
-            Console.WriteLine("----------");
-        }
-
-        public void AddTeilmenge(Interfaces.IMenge<T> teilmenge, T t, int kardinalitaet)
-        {
-            if (Potenzmenge == null)
-            {
-                return;
-            }
-
-            if (teilmenge.Count.Equals(kardinalitaet))
-            {
-                if (!teilmenge.IstElementVon(Potenzmenge))
-                {
-                    Potenzmenge.Add(teilmenge.Copy());
-
-                    Console.WriteLine();
-
-                    Console.Write("----------");
-
-                    Console.Write(Potenzmenge.ToString());
-
-                    Console.WriteLine("----------");
-                }
-
-                teilmenge.Remove(t);
+            catch (Exception ex) 
+            { 
+                Console.WriteLine(ex.ToString()); 
             }
         }
 
-        public void PotenzmengenRekursion(Interfaces.IMenge<T> teilmenge, int schleifen, int kardinalitaet)
+        public void PotenzmengenRekursion(Elemente<T> teilmenge, int schleifen, int kardinalitaet)
+        //public void PotenzmengenRekursion(Interfaces.IMenge<T> teilmenge, int schleifen, int kardinalitaet)
         {
             if (schleifen > kardinalitaet)
             {
@@ -258,9 +167,10 @@
 
             int index = 1;
 
-            Interfaces.IMenge<T> schleifenTeilmenge = LeereMenge();
+            Elemente<T> schleifenTeilmenge = new Elemente<T>();
+            //Interfaces.IMenge<T> schleifenTeilmenge = LeereMenge;
 
-            foreach (T t in this)
+            foreach (T t in Elemente)
             {
                 if (!schleifenTeilmenge.HatElement(t) &&
                     index > schleifen)
@@ -273,40 +183,55 @@
                     teilmenge.Add(t);
                 }
 
-                Console.Write("i" + index + "s" + schleifen + teilmenge.ToString());
-
-                Console.Write(".");
-
                 AddTeilmenge(schleifenTeilmenge, t, kardinalitaet);
 
                 AddTeilmenge(teilmenge, t, kardinalitaet);
 
                 PotenzmengenRekursion(teilmenge.Copy(), schleifen + 1, kardinalitaet);
 
-                Console.WriteLine();
-
-                Console.WriteLine($"s({schleifen});i({index})");
+                Console.Write('.');
 
                 index++;
             }
         }
-        public new void Add(T t)
+
+        public void AddTeilmenge(Elemente<T> teilmenge, T t, int kardinalitaet)
+        //public void AddTeilmenge(Interfaces.IMenge<T> teilmenge, T t, int kardinalitaet)
         {
-            base.Add(t);
+            if (Potenzmenge == null)
+            {
+                return;
+            }
+
+            if (teilmenge.Count.Equals(kardinalitaet))
+            {
+                if (!Potenzmenge.HatElement(teilmenge))
+                {
+                    Potenzmenge.Add(teilmenge.Copy());
+
+                }
+
+                teilmenge.Remove(t);
+            }
         }
 
-        public new void Remove(T menge)
+        public void Add(T t)
         {
-            base.Remove(menge);
+            Elemente.Add(t);
+        }
+
+        public void Remove(T menge)
+        {
+            Elemente.Remove(menge);
         }
 
         public Interfaces.IMenge<T> Copy()
         {
-            Interfaces.IMenge<T> copy = LeereMenge();
+            Interfaces.IMenge<T> copy = LeereMenge;
 
-            foreach (T t in this)
+            foreach (T t in Elemente)
             {
-                copy.Add(t);
+                copy.Elemente.Add(t);
             }
 
             return copy;
@@ -316,14 +241,14 @@
         {
             if (other == null) return false;
 
-            return IstGleich(other);
+            return Elemente.IstGleich(other.Elemente);
         }
 
-        public bool Equals(AbstractMenge<T>? other)
-        {
-            if (other == null) return false;
+        //public bool Equals(AbstractMenge<T>? other)
+        //{
+        //    if (other == null) return false;
 
-            return IstGleich(other);
-        }
+        //    return IstGleich(other);
+        //}
     }
 }

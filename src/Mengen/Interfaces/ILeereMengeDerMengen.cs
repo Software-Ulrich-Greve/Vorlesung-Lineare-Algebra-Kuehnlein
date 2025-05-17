@@ -2,6 +2,6 @@
 {
     public interface ILeereMengeDerMengen<T> where T : IEquatable<T>
     {
-        public IMenge<T> LeereMengeDerMengen();
+        public Elemente<T> LeereMengeDerMengen { get; }
     }
 }

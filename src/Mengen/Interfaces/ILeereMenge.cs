@@ -1,7 +1,7 @@
 ﻿namespace src.Mengen.Interfaces
 {
-    public interface ILeereMenge<T> where T : IEquatable<T>
+    public interface ILeereMenge<T>
     {
-        public IMenge<T> LeereMenge();
+        public T LeereMenge { get; }
     }
 }

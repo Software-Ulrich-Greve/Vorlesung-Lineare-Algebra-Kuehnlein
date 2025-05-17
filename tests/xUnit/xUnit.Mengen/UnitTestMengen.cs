@@ -77,20 +77,20 @@ public class UnitTestMengen
 
         Assert.False(TestMenge.Potenzmenge == null);
 
-        Assert.True(TestMenge.Potenzmenge.GetElementMitIndex(0).IstGleich(TestTeilMenge0));
+        Assert.True(TestMenge.Potenzmenge.ElementMitIndex(0).IstGleich(TestTeilMenge0.Elemente));
 
-        Assert.True(TestMenge.Potenzmenge.GetElementMitIndex(1).IstGleich(TestTeilMenge1));
+        Assert.True(TestMenge.Potenzmenge.ElementMitIndex(1).IstGleich(TestTeilMenge1.Elemente));
 
-        Assert.True(TestMenge.Potenzmenge.GetElementMitIndex(2).IstGleich(TestTeilMenge2));
+        Assert.True(TestMenge.Potenzmenge.ElementMitIndex(2).IstGleich(TestTeilMenge2.Elemente));
 
-        Assert.True(TestMenge.Potenzmenge.GetElementMitIndex(3).IstGleich(TestTeilMenge3));
+        Assert.True(TestMenge.Potenzmenge.ElementMitIndex(3).IstGleich(TestTeilMenge3.Elemente));
 
-        Assert.True(TestMenge.Potenzmenge.GetElementMitIndex(4).IstGleich(TestTeilMenge4));
+        Assert.True(TestMenge.Potenzmenge.ElementMitIndex(4).IstGleich(TestTeilMenge4.Elemente));
 
-        Assert.True(TestMenge.Potenzmenge.GetElementMitIndex(5).IstGleich(TestTeilMenge5));
+        Assert.True(TestMenge.Potenzmenge.ElementMitIndex(5).IstGleich(TestTeilMenge5.Elemente));
 
-        Assert.True(TestMenge.Potenzmenge.GetElementMitIndex(6).IstGleich(TestTeilMenge6));
+        Assert.True(TestMenge.Potenzmenge.ElementMitIndex(6).IstGleich(TestTeilMenge6.Elemente));
 
-        Assert.True(TestMenge.Potenzmenge.GetElementMitIndex(7).IstGleich(TestTeilMenge7));
+        Assert.True(TestMenge.Potenzmenge.ElementMitIndex(7).IstGleich(TestTeilMenge7.Elemente));
     }
 }

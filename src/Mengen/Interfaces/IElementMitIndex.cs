@@ -2,6 +2,6 @@
 {
     public interface IElementMitIndex<T> where T : IEquatable<T>
     {
-        public T GetElementMitIndex(int index);
+        public T ElementMitIndex(int index);
     }
 }

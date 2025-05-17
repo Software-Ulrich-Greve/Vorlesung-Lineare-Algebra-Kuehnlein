@@ -10,16 +10,6 @@
 
         public override bool IstAbzaehlbar { get { return true; } }
 
-        public override Interfaces.IMenge<Bruch> LeereMenge()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Interfaces.IMenge<Interfaces.IMenge<Bruch>> LeereMengeDerMengen()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool HatElement(int element)
         {
             return true;

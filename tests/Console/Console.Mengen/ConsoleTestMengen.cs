@@ -12,18 +12,15 @@
 
         public src.Mengen.Interfaces.IMenge<int> ? TestTeilMenge3 { get; set; }
 
-        public src.Mengen.Interfaces.IMenge<src.Mengen.Interfaces.IMenge<int>>? MengeDerTeilmengenCalculated { get; set; }
-
         public ConsoleTestMengen()
         {
-            TestMenge = new src.Mengen.TestMenge
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            TestMenge = new src.Mengen.TestMenge();
+
+            TestMenge.Add(1);
+            TestMenge.Add(2);
+            TestMenge.Add(3);
+            TestMenge.Add(4);
+            TestMenge.Add(5);
 
             //TestTeilMenge0 = new TestMenge();
 
@@ -42,8 +39,6 @@
             //TestTeilMenge3.Add(2);
 
             TestMenge.BerechnePotenzMenge();
-
-            MengeDerTeilmengenCalculated = TestMenge.Potenzmenge;
         }
     }
 }
