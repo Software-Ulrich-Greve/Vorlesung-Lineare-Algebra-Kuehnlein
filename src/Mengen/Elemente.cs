@@ -12,7 +12,6 @@
         Interfaces.IDurchschnitt<Elemente<T>>,
         Interfaces.IVereinigung<Elemente<T>>,
         Interfaces.IDifferenzMenge<Elemente<T>>,
-        //Interfaces.IIstElementVon<Elemente<Elemente<T>>>,
         Interfaces.IToString,
         Interfaces.ICopy<Elemente<T>>
         where T :
@@ -27,7 +26,7 @@
             }
         }
 
-        public Elemente() : base()
+        public Elemente()
         {
         }
 
@@ -162,24 +161,6 @@
             return differenzMenge;
         }
 
-        //public bool IstElementVon(Elemente<Elemente<T>>? elemente)
-        //{
-        //    if (elemente == null)
-        //    {
-        //        return false;
-        //    }
-
-        //    foreach (Elemente<T> e in elemente)
-        //    {
-        //        if (IstGleich(e))
-        //        {
-        //            return true;
-        //        }
-        //    }
-
-        //    return false;
-        //}
-
         public override string ToString()
         {
             string text = "{";
@@ -214,6 +195,99 @@
         public bool Equals(Elemente<T>? other)
         {
             return IstGleich(other);
+        }
+
+        public Elemente<Elemente<T>>? PotenzMenge()
+        {
+            Elemente<Elemente<T>> potenzmenge = new Elemente<Elemente<T>>();
+
+            try
+            {
+                if (Kardinalitaet == null)
+                {
+                    return null;
+                }
+
+                for (int kardinalitaet = 0; kardinalitaet <= Count; kardinalitaet++)
+                {
+                    Console.WriteLine();
+
+                    Console.WriteLine("Kardinalitaet: " + kardinalitaet);
+
+                    if (kardinalitaet == 0)
+                    {
+                        potenzmenge.Add(new Elemente<T>());
+
+                        Console.WriteLine();
+
+                        Console.WriteLine(potenzmenge.ToString());
+
+                        continue;
+                    }
+
+                    PotenzmengenRekursion(potenzmenge, new Elemente<T>(), 1, kardinalitaet);
+
+                    Console.WriteLine();
+
+                    Console.WriteLine(potenzmenge.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return potenzmenge;
+        }
+
+        public void PotenzmengenRekursion(Elemente<Elemente<T>> potenzmenge, Elemente<T> teilmenge, int schleifen, int kardinalitaet)
+        {
+            if (schleifen > kardinalitaet)
+            {
+                return;
+            }
+
+            int index = 1;
+
+            Elemente<T> schleifenTeilmenge = new Elemente<T>();
+
+            foreach (T t in this)
+            {
+                if (!schleifenTeilmenge.HatElement(t) &&
+                    index > schleifen)
+                {
+                    schleifenTeilmenge.Add(t);
+                }
+
+                if (!teilmenge.HatElement(t))
+                {
+                    teilmenge.Add(t);
+                }
+
+                AddTeilmenge(potenzmenge, schleifenTeilmenge, t, kardinalitaet);
+
+                AddTeilmenge(potenzmenge, teilmenge, t, kardinalitaet);
+
+                PotenzmengenRekursion(potenzmenge, teilmenge.Copy(), schleifen + 1, kardinalitaet);
+
+                Console.Write('.');
+
+                index++;
+            }
+        }
+
+        public void AddTeilmenge(Elemente<Elemente<T>> potenzmenge, Elemente<T> teilmenge, T t, int kardinalitaet)
+        {
+            if (teilmenge.Count.Equals(kardinalitaet))
+            {
+                if (!potenzmenge.HatElement(teilmenge))
+                {
+                    potenzmenge.Add(teilmenge.Copy());
+
+                }
+
+                teilmenge.Remove(t);
+            }
         }
     }
 }

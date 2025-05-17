@@ -1,4 +1,6 @@
-﻿namespace Mengen
+﻿using src.Mengen.Interfaces;
+
+namespace Mengen
 {
     public class ConsoleTestMengen
     {
@@ -38,7 +40,10 @@
 
             //TestTeilMenge3.Add(2);
 
-            TestMenge.BerechnePotenzMenge();
+            Console.WriteLine();
+
+            Console.WriteLine(TestMenge.Elemente.PotenzMenge()?.ToString());
+
         }
     }
 }

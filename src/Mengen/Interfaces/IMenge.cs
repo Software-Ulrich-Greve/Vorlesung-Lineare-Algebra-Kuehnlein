@@ -13,9 +13,7 @@
             IDurchschnitt<IMenge<T>>,
             IVereinigung<IMenge<T>>,
             IDifferenzMenge<IMenge<T>>,
-            //IIstElementVon<IMenge<IMenge<T>>>,
             IToString,
-            IPotenzMenge<Elemente<T>>,
             ICopy<IMenge<T>>
         where T : IEquatable<T>
     {
