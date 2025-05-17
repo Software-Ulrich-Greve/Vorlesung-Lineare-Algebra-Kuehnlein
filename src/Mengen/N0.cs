@@ -10,12 +10,12 @@
 
         public override bool IstAbzaehlbar { get { return true; } }
 
-        public override AbstractMenge<int> LeereMenge()
+        public override Interfaces.IMenge<int> LeereMenge()
         {
             throw new NotImplementedException();
         }
 
-        public override AbstractMenge<AbstractMenge<int>> LeereMengeDerMengen()
+        public override Interfaces.IMenge<Interfaces.IMenge<int>> LeereMengeDerMengen()
         {
             throw new NotImplementedException();
         }
@@ -32,7 +32,7 @@
             }
         }
 
-        public bool IstTeilmengeVon<E>(AbstractMenge<E> menge) where E : IEquatable<E>
+        public bool IstTeilmengeVon<E>(Interfaces.IMenge<E> menge) where E : IEquatable<E>
         {
             if (typeof(Z).Equals(menge.GetType()) ||
                 new Z().IstTeilmengeVon(menge))
@@ -43,7 +43,7 @@
             return false;
         }
 
-        public bool IstGleich<E>(AbstractMenge<E> menge) where E : IEquatable<E>
+        public bool IstGleich<E>(Interfaces.IMenge<E> menge) where E : IEquatable<E>
         {
             if (typeof(Z).Equals(menge.GetType()))
             {
@@ -53,17 +53,17 @@
             return false;
         }
 
-        public AbstractMenge<E> Durchschnitt<E>(AbstractMenge<E> menge) where E : IEquatable<E>
+        public Interfaces.IMenge<E> Durchschnitt<E>(Interfaces.IMenge<E> menge) where E : IEquatable<E>
         {
             throw new NotImplementedException();
         }
 
-        public AbstractMenge<E> Vereinigung<E>(AbstractMenge<E> menge) where E : IEquatable<E>
+        public Interfaces.IMenge<E> Vereinigung<E>(Interfaces.IMenge<E> menge) where E : IEquatable<E>
         {
             throw new NotImplementedException();
         }
 
-        public AbstractMenge<E> DifferenzMenge<E>(AbstractMenge<E> menge) where E : IEquatable<E>
+        public Interfaces.IMenge<E> DifferenzMenge<E>(Interfaces.IMenge<E> menge) where E : IEquatable<E>
         {
             throw new NotImplementedException();
         }

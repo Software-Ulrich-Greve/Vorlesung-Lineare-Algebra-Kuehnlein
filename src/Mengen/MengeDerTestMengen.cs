@@ -1,16 +1,18 @@
 ﻿namespace src.Mengen
 {
-    public class MengeDerTestMengen : AbstractMenge<AbstractMenge<int>>
+    public class MengeDerTestMengen :
+        AbstractMenge<Interfaces.IMenge<int>>,
+        Interfaces.IMenge<Interfaces.IMenge<int>>
     {
         public override bool IstEndlich { get { return true; } }
 
         public override bool IstAbzaehlbar { get { return true; } }
 
-        public override AbstractMenge<AbstractMenge<int>> LeereMenge()
+        public override Interfaces.IMenge<Interfaces.IMenge<int>> LeereMenge()
         {
             return new MengeDerTestMengen();
         }
-        public override AbstractMenge<AbstractMenge<AbstractMenge<int>>> LeereMengeDerMengen()
+        public override Interfaces.IMenge<Interfaces.IMenge<Interfaces.IMenge<int>>> LeereMengeDerMengen()
         {
             throw new NotImplementedException();
         }

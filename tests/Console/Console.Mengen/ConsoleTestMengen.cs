@@ -2,17 +2,17 @@
 {
     public class ConsoleTestMengen
     {
-        public src.Mengen.AbstractMenge<int> ? TestMenge { get; set; }
+        public src.Mengen.Interfaces.IMenge<int> ? TestMenge { get; set; }
 
-        public src.Mengen.AbstractMenge<int> ? TestTeilMenge0 { get; set; }
+        public src.Mengen.Interfaces.IMenge<int> ? TestTeilMenge0 { get; set; }
 
-        public src.Mengen.AbstractMenge<int> ? TestTeilMenge1 { get; set; }
+        public src.Mengen.Interfaces.IMenge<int> ? TestTeilMenge1 { get; set; }
 
-        public src.Mengen.AbstractMenge<int> ? TestTeilMenge2 { get; set; }
+        public src.Mengen.Interfaces.IMenge<int> ? TestTeilMenge2 { get; set; }
 
-        public src.Mengen.AbstractMenge<int> ? TestTeilMenge3 { get; set; }
+        public src.Mengen.Interfaces.IMenge<int> ? TestTeilMenge3 { get; set; }
 
-        public src.Mengen.AbstractMenge<src.Mengen.AbstractMenge<int>>? MengeDerTeilmengenCalculated { get; set; }
+        public src.Mengen.Interfaces.IMenge<src.Mengen.Interfaces.IMenge<int>>? MengeDerTeilmengenCalculated { get; set; }
 
         public ConsoleTestMengen()
         {

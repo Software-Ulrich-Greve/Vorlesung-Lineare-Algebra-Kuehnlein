@@ -11,12 +11,12 @@
             return base.Equals(other);
         }
 
-        public override AbstractMenge<int> LeereMenge()
+        public override Interfaces.IMenge<int> LeereMenge()
         {
             return new TestMenge();
         }
 
-        public override AbstractMenge<AbstractMenge<int>> LeereMengeDerMengen()
+        public override Interfaces.IMenge<Interfaces.IMenge<int>> LeereMengeDerMengen()
         {
             return new MengeDerTestMengen().LeereMenge();
         }

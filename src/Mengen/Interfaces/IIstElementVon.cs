@@ -2,6 +2,6 @@
 {
     public interface IIstElementVon<E> where E : IEquatable<E>
     {
-        public bool IstElementVon(AbstractMenge<E> menge);
+        public bool IstElementVon(IMenge<E> menge);
     }
 }

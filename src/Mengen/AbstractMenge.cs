@@ -3,32 +3,35 @@
     public abstract class AbstractMenge<T> :
         List<T>,
         IEquatable<AbstractMenge<T>>,
+        IEquatable<Interfaces.IMenge<T>>,
         Interfaces.IEndlichkeit,
         Interfaces.IAbzaehlbarkeit,
         Interfaces.ILeereMenge<T>,
-        Interfaces.ILeereMengeDerMengen<AbstractMenge<T>>,
+        Interfaces.ILeereMengeDerMengen<Interfaces.IMenge<T>>,
         Interfaces.IKardinalitaet,
         Interfaces.IHatElement<T>,
-        Interfaces.IIstElementVon<AbstractMenge<T>>,
+        Interfaces.IIstElementVon<Interfaces.IMenge<T>>,
         Interfaces.IElementMitIndex<T>,
-        Interfaces.IIstTeilmengeVon<AbstractMenge<T>>,
-        Interfaces.IIstGleich<AbstractMenge<T>>,
-        Interfaces.IDurchschnitt<AbstractMenge<T>>,
-        Interfaces.IVereinigung<AbstractMenge<T>>,
-        Interfaces.IDifferenzMenge<AbstractMenge<T>>,
+        Interfaces.IIstTeilmengeVon<Interfaces.IMenge<T>>,
+        Interfaces.IIstGleich<Interfaces.IMenge<T>>,
+        Interfaces.IDurchschnitt<Interfaces.IMenge<T>>,
+        Interfaces.IVereinigung<Interfaces.IMenge<T>>,
+        Interfaces.IDifferenzMenge<Interfaces.IMenge<T>>,
         Interfaces.IToString,
-        Interfaces.IPotenzMenge<AbstractMenge<T>>
+        Interfaces.IPotenzMenge<Interfaces.IMenge<T>>,
+        Interfaces.ICopy<Interfaces.IMenge<T>>,
+        Interfaces.IMenge<T>
         where T : IEquatable<T>
     {
         public abstract bool IstEndlich { get; }
 
         public abstract bool IstAbzaehlbar { get; }
 
-        public abstract AbstractMenge<T> LeereMenge();
+        public abstract Interfaces.IMenge<T> LeereMenge();
 
-        public abstract AbstractMenge<AbstractMenge<T>> LeereMengeDerMengen();
+        public abstract Interfaces.IMenge<Interfaces.IMenge<T>> LeereMengeDerMengen();
 
-        public AbstractMenge<AbstractMenge<T>>? Potenzmenge { get; set; }
+        public Interfaces.IMenge<Interfaces.IMenge<T>>? Potenzmenge { get; set; }
 
         public int? Kardinalitaet()
         {
@@ -53,9 +56,9 @@
             return false;
         }
 
-        public bool IstElementVon(AbstractMenge<AbstractMenge<T>> menge)
+        public bool IstElementVon(Interfaces.IMenge<Interfaces.IMenge<T>> menge)
         {
-            foreach (AbstractMenge<T> m in menge)
+            foreach (Interfaces.IMenge<T> m in menge)
             {
                 if (IstGleich(m))
                 {
@@ -83,7 +86,7 @@
             throw new KeyNotFoundException();
         }
 
-        public bool IstTeilmengeVon(AbstractMenge<T> menge)
+        public bool IstTeilmengeVon(Interfaces.IMenge<T> menge)
         {
             foreach (T t in this)
             {
@@ -96,7 +99,7 @@
             return true;
         }
 
-        public bool IstGleich(AbstractMenge<T> menge)
+        public bool IstGleich(Interfaces.IMenge<T> menge)
         {
             if (menge == null)
             {
@@ -104,7 +107,7 @@
             }
 
             if (IstTeilmengeVon(menge) &&
-                menge.IstTeilmengeVon(this))
+                menge.IstTeilmengeVon((Interfaces.IMenge<T>)this))
             {
                 return true;
             }
@@ -112,9 +115,9 @@
             return false;
         }
 
-        public AbstractMenge<T> Durchschnitt(AbstractMenge<T> mengeDerMengen)
+        public Interfaces.IMenge<T> Durchschnitt(Interfaces.IMenge<T> mengeDerMengen)
         {
-            AbstractMenge<T> durchschnitt = LeereMenge();
+            Interfaces.IMenge<T> durchschnitt = LeereMenge();
 
             foreach (T t in this)
             {
@@ -127,9 +130,9 @@
             return durchschnitt;
         }
 
-        public AbstractMenge<T> Vereinigung(AbstractMenge<T> menge)
+        public Interfaces.IMenge<T> Vereinigung(Interfaces.IMenge<T> menge)
         {
-            AbstractMenge<T> vereinigung = menge;
+            Interfaces.IMenge<T> vereinigung = menge;
 
             foreach (T t in this)
             {
@@ -142,9 +145,9 @@
             return vereinigung;
         }
 
-        public AbstractMenge<T> DifferenzMenge(AbstractMenge<T> menge)
+        public Interfaces.IMenge<T> DifferenzMenge(Interfaces.IMenge<T> menge)
         {
-            AbstractMenge<T> differenzMenge = this;
+            Interfaces.IMenge<T> differenzMenge = (Interfaces.IMenge<T>)this;
 
             foreach (T t in this)
             {
@@ -220,7 +223,7 @@
             Console.WriteLine("----------");
         }
 
-        public void AddTeilmenge(AbstractMenge<T> teilmenge, T t, int kardinalitaet)
+        public void AddTeilmenge(Interfaces.IMenge<T> teilmenge, T t, int kardinalitaet)
         {
             if (Potenzmenge == null)
             {
@@ -246,7 +249,7 @@
             }
         }
 
-        public void PotenzmengenRekursion(AbstractMenge<T> teilmenge, int schleifen, int kardinalitaet)
+        public void PotenzmengenRekursion(Interfaces.IMenge<T> teilmenge, int schleifen, int kardinalitaet)
         {
             if (schleifen > kardinalitaet)
             {
@@ -255,7 +258,7 @@
 
             int index = 1;
 
-            AbstractMenge<T> schleifenTeilmenge = LeereMenge();
+            Interfaces.IMenge<T> schleifenTeilmenge = LeereMenge();
 
             foreach (T t in this)
             {
@@ -297,9 +300,9 @@
             base.Remove(menge);
         }
 
-        public AbstractMenge<T> Copy()
+        public Interfaces.IMenge<T> Copy()
         {
-            AbstractMenge<T> copy = LeereMenge();
+            Interfaces.IMenge<T> copy = LeereMenge();
 
             foreach (T t in this)
             {
@@ -309,12 +312,18 @@
             return copy;
         }
 
+        public bool Equals(Interfaces.IMenge<T>? other)
+        {
+            if (other == null) return false;
+
+            return IstGleich(other);
+        }
+
         public bool Equals(AbstractMenge<T>? other)
         {
             if (other == null) return false;
 
             return IstGleich(other);
-
         }
     }
 }
