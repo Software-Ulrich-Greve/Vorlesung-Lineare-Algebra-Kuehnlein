@@ -2,7 +2,6 @@
 {
     public class Elemente<T> :
         List<T>,
-        IEquatable<Elemente<T>>,
         Interfaces.ILeereMenge<Elemente<T>>,
         Interfaces.IKardinalitaet,
         Interfaces.IHatElement<T>,
@@ -13,7 +12,9 @@
         Interfaces.IVereinigung<Elemente<T>>,
         Interfaces.IDifferenzMenge<Elemente<T>>,
         Interfaces.IToString,
-        Interfaces.ICopy<Elemente<T>>
+        Interfaces.ICopy<Elemente<T>>,
+        IEquatable<Elemente<T>>,
+        Interfaces.IPotenzMenge<Elemente<T>>
         where T :
         IEquatable<T>
 
@@ -26,7 +27,7 @@
             }
         }
 
-        public Elemente()
+        public Elemente() : base()
         {
         }
 
@@ -201,40 +202,33 @@
         {
             Elemente<Elemente<T>> potenzmenge = new Elemente<Elemente<T>>();
 
-            try
+            if (Kardinalitaet == null)
             {
-                if (Kardinalitaet == null)
+                return null;
+            }
+
+            for (int kardinalitaet = 0; kardinalitaet <= Count; kardinalitaet++)
+            {
+                Console.WriteLine();
+
+                Console.WriteLine("Kardinalitaet: " + kardinalitaet);
+
+                if (kardinalitaet == 0)
                 {
-                    return null;
-                }
-
-                for (int kardinalitaet = 0; kardinalitaet <= Count; kardinalitaet++)
-                {
-                    Console.WriteLine();
-
-                    Console.WriteLine("Kardinalitaet: " + kardinalitaet);
-
-                    if (kardinalitaet == 0)
-                    {
-                        potenzmenge.Add(new Elemente<T>());
-
-                        Console.WriteLine();
-
-                        Console.WriteLine(potenzmenge.ToString());
-
-                        continue;
-                    }
-
-                    PotenzmengenRekursion(potenzmenge, new Elemente<T>(), 1, kardinalitaet);
+                    potenzmenge.Add(new Elemente<T>());
 
                     Console.WriteLine();
 
                     Console.WriteLine(potenzmenge.ToString());
+
+                    continue;
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
+
+                PotenzmengenRekursion(potenzmenge, new Elemente<T>(), 1, kardinalitaet);
+
+                Console.WriteLine();
+
+                Console.WriteLine(potenzmenge.ToString());
             }
 
             return potenzmenge;

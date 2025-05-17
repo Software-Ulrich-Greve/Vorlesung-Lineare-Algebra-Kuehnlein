@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.Mengen", "tests\Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.Mengen", "tests\xUnit\xUnit.Mengen\xUnit.Mengen.csproj", "{9D50237C-A93D-4276-8791-6333DE1D3BFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "src\Library\Library.csproj", "{65F16666-B10F-4A4D-9B14-1C0C5D37C02B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{9D50237C-A93D-4276-8791-6333DE1D3BFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D50237C-A93D-4276-8791-6333DE1D3BFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D50237C-A93D-4276-8791-6333DE1D3BFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65F16666-B10F-4A4D-9B14-1C0C5D37C02B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65F16666-B10F-4A4D-9B14-1C0C5D37C02B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65F16666-B10F-4A4D-9B14-1C0C5D37C02B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65F16666-B10F-4A4D-9B14-1C0C5D37C02B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{E2B05940-D1C7-42B5-9B5A-A6763CF4D3E5} = {F7FFA903-91A1-4E8E-9863-8673C27C8D71}
 		{BDC1C2E7-FA51-4584-AC88-97D3A27D00ED} = {E2B05940-D1C7-42B5-9B5A-A6763CF4D3E5}
 		{9D50237C-A93D-4276-8791-6333DE1D3BFE} = {DFF36E0E-1A64-4AA1-B014-CA9DC1EA9483}
+		{65F16666-B10F-4A4D-9B14-1C0C5D37C02B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E925351-AE40-4C2D-8543-57BDA8509097}
