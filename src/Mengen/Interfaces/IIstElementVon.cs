@@ -1,7 +1,7 @@
 ﻿namespace src.Mengen.Interfaces
 {
-    public interface IIstElementVon<E> where E : IEquatable<E>
+    public interface IIstElementVon<M>
     {
-        public bool IstElementVon(IMenge<E> menge);
+        public bool IstElementVon(M? menge);
     }
 }

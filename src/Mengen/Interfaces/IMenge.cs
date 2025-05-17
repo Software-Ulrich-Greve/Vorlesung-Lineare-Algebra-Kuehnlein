@@ -1,25 +1,28 @@
 ﻿namespace src.Mengen.Interfaces
 {
     public interface IMenge<T> :
-        IList<T>,
-        IEquatable<IMenge<T>>,
-        IEndlichkeit,
-        IAbzaehlbarkeit,
-        ILeereMenge<T>,
-        ILeereMengeDerMengen<IMenge<T>>,
-        IKardinalitaet,
-        IHatElement<T>,
-        IIstElementVon<IMenge<T>>,
-        IElementMitIndex<T>,
-        IIstTeilmengeVon<IMenge<T>>,
-        IIstGleich<IMenge<T>>,
-        IDurchschnitt<IMenge<T>>,
-        IVereinigung<IMenge<T>>,
-        IDifferenzMenge<IMenge<T>>,
-        IToString,
-        IPotenzMenge<IMenge<T>>,
-        ICopy<IMenge<T>>
+            IEquatable<IMenge<T>>,
+            IEndlichkeit,
+            IAbzaehlbarkeit,
+            ILeereMenge<IMenge<T>>,
+            IKardinalitaet,
+            IHatElement<T>,
+            IElementMitIndex<T>,
+            IIstTeilmengeVon<IMenge<T>>,
+            IIstGleich<IMenge<T>>,
+            IDurchschnitt<IMenge<T>>,
+            IVereinigung<IMenge<T>>,
+            IDifferenzMenge<IMenge<T>>,
+            IToString,
+            ICopy<IMenge<T>>
         where T : IEquatable<T>
     {
+        public Elemente<T> Elemente { get; set; }
+
+        public IMenge<T> Initialize(Elemente<T> elemente);
+
+        public void Add(T t);
+
+        public void Remove(T t);
     }
 }
