@@ -66,7 +66,7 @@
             return false;
         }
 
-        public T GetElementMitIndex(int index)
+        public T ElementMitIndex(int index)
         {
             int i = 0;
 
