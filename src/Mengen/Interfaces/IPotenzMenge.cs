@@ -4,6 +4,6 @@
     {
         public int KardinalitaetPotenzmenge { get; }
 
-        public GenerischeMenge<M>? PotenzMenge();
+        public GenerischeMenge<M>? Potenzmenge();
     }
 }

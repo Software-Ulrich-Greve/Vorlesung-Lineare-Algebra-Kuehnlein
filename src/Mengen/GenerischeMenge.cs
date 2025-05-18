@@ -136,7 +136,7 @@
 
             foreach (TElement element in elemente)
             {
-                if (!elemente.HatElement(element))
+                if (HatElement(element))
                 {
                     durchschnitt.Add(element);
                 }
@@ -165,7 +165,7 @@
             return vereinigung;
         }
 
-        public GenerischeMenge<TElement> DifferenzMenge(GenerischeMenge<TElement>? elemente)
+        public GenerischeMenge<TElement> Differenzmenge(GenerischeMenge<TElement>? elemente)
         {
             GenerischeMenge<TElement> differenzMenge = this;
 
@@ -221,7 +221,7 @@
             return HashCodeFunction(this);
         }
 
-        public GenerischeMenge<GenerischeMenge<TElement>>? PotenzMenge()
+        public GenerischeMenge<GenerischeMenge<TElement>>? Potenzmenge()
         {
             GenerischeMenge<GenerischeMenge<TElement>> potenzmenge = new GenerischeMenge<GenerischeMenge<TElement>>();
 

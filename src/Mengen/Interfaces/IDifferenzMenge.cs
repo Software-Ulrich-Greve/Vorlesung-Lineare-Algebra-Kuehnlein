@@ -2,6 +2,6 @@
 {
     public interface IDifferenzMenge<M>
     {
-        public M DifferenzMenge(M menge);
+        public M Differenzmenge(M menge);
     }
 }

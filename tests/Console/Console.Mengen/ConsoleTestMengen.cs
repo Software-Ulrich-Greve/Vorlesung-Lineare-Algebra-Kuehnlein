@@ -17,7 +17,7 @@
                 TestMenge.Add(4);
                 TestMenge.Add(5);
 
-                src.Mengen.GenerischeMenge<src.Mengen.GenerischeMenge<int>>? potenzMenge = TestMenge.PotenzMenge();
+                src.Mengen.GenerischeMenge<src.Mengen.GenerischeMenge<int>>? potenzMenge = TestMenge.Potenzmenge();
 
                 Console.WriteLine();
 
