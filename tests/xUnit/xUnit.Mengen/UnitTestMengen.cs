@@ -2,25 +2,24 @@ namespace tests.xUnit.Mengen;
 
 public class UnitTestMengen
 {
-    public src.Mengen.Interfaces.IMenge<int>? TestMenge { get; set; }
+    public src.Mengen.Elemente<int>? TestMenge { get; set; }
 
-    public src.Mengen.Interfaces.IMenge<int>? TestTeilMenge0 { get; set; }
+    public src.Mengen.Elemente<int>? TestTeilMenge0 { get; set; }
 
-    public src.Mengen.Interfaces.IMenge<int>? TestTeilMenge1 { get; set; }
+    public src.Mengen.Elemente<int>? TestTeilMenge1 { get; set; }
 
-    public src.Mengen.Interfaces.IMenge<int>? TestTeilMenge2 { get; set; }
+    public src.Mengen.Elemente<int>? TestTeilMenge2 { get; set; }
 
-    public src.Mengen.Interfaces.IMenge<int>? TestTeilMenge3 { get; set; }
+    public src.Mengen.Elemente<int>? TestTeilMenge3 { get; set; }
 
-    public src.Mengen.Interfaces.IMenge<int>? TestTeilMenge4 { get; set; }
+    public src.Mengen.Elemente<int>? TestTeilMenge4 { get; set; }
 
-    public src.Mengen.Interfaces.IMenge<int>? TestTeilMenge5 { get; set; }
+    public src.Mengen.Elemente<int>? TestTeilMenge5 { get; set; }
 
-    public src.Mengen.Interfaces.IMenge<int>? TestTeilMenge6 { get; set; }
+    public src.Mengen.Elemente<int>? TestTeilMenge6 { get; set; }
 
-    public src.Mengen.Interfaces.IMenge<int>? TestTeilMenge7 { get; set; }
+    public src.Mengen.Elemente<int>? TestTeilMenge7 { get; set; }
 
-    public src.Mengen.Interfaces.IMenge<src.Mengen.Interfaces.IMenge<int>>? MengeDerTeilmengenCalculated { get; set; }
 
     [Fact]
     public void TestPotenzMengeKardinalitaet3()
@@ -73,24 +72,24 @@ public class UnitTestMengen
 
         TestTeilMenge7.Add(3);
 
-        TestMenge.Elemente.BerechnePotenzMenge();
+        src.Mengen.Elemente<src.Mengen.Elemente<int>>? Potenzmenge = TestMenge.PotenzMenge();
 
-        Assert.False(TestMenge.Elemente.Potenzmenge == null);
+        Assert.False(Potenzmenge == null);
 
-        Assert.True(TestMenge.Elemente.Potenzmenge.ElementMitIndex(0).IstGleich(TestTeilMenge0.Elemente));
+        Assert.True(Potenzmenge.ElementMitIndex(0).IstGleich(TestTeilMenge0));
 
-        Assert.True(TestMenge.Elemente.Potenzmenge.ElementMitIndex(1).IstGleich(TestTeilMenge1.Elemente));
+        Assert.True(Potenzmenge.ElementMitIndex(1).IstGleich(TestTeilMenge1));
 
-        Assert.True(TestMenge.Elemente.Potenzmenge.ElementMitIndex(2).IstGleich(TestTeilMenge2.Elemente));
+        Assert.True(Potenzmenge.ElementMitIndex(2).IstGleich(TestTeilMenge2));
 
-        Assert.True(TestMenge.Elemente.Potenzmenge.ElementMitIndex(3).IstGleich(TestTeilMenge3.Elemente));
+        Assert.True(Potenzmenge.ElementMitIndex(3).IstGleich(TestTeilMenge3));
 
-        Assert.True(TestMenge.Elemente.Potenzmenge.ElementMitIndex(4).IstGleich(TestTeilMenge4.Elemente));
+        Assert.True(Potenzmenge.ElementMitIndex(4).IstGleich(TestTeilMenge4));
 
-        Assert.True(TestMenge.Elemente.Potenzmenge.ElementMitIndex(5).IstGleich(TestTeilMenge5.Elemente));
+        Assert.True(Potenzmenge.ElementMitIndex(5).IstGleich(TestTeilMenge5));
 
-        Assert.True(TestMenge.Elemente.Potenzmenge.ElementMitIndex(6).IstGleich(TestTeilMenge6.Elemente));
+        Assert.True(Potenzmenge.ElementMitIndex(6).IstGleich(TestTeilMenge6));
 
-        Assert.True(TestMenge.Elemente.Potenzmenge.ElementMitIndex(7).IstGleich(TestTeilMenge7.Elemente));
+        Assert.True(Potenzmenge.ElementMitIndex(7).IstGleich(TestTeilMenge7));
     }
 }

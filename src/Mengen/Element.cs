@@ -1,11 +1,12 @@
 ﻿namespace src.Mengen
 {
     public class Element<T> :
-        Library.Interfaces.IHashCode,
+        //Library.Interfaces.IHashCode,
         Interfaces.IToString,
         Interfaces.IIstElementVon<Elemente<T>>,
         Interfaces.IIstGleich<Element<T>>,
-        Interfaces.ICopy<Element<T>>
+        Interfaces.ICopy<Element<T>>,
+        IEquatable<Element<Elemente<T>>>
         where T :
         IEquatable<T>
 
@@ -68,6 +69,16 @@
         public bool Equals(Element<T>? other)
         {
             return IstGleich(other);
+        }
+
+        public bool Equals(Element<Elemente<T>>? other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            return other.Inhalt.Equals(Inhalt);
         }
     }
 }

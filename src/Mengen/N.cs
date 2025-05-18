@@ -1,6 +1,6 @@
 ﻿namespace src.Mengen
 {
-    public class N : AbstractMenge<int>
+    public class N : Interfaces.IMenge<int>
     {
         public N() : base()
         {

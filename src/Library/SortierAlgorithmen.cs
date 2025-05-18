@@ -1,29 +1,52 @@
 ﻿namespace Library
 {
-    public class SortierAlgorithmen<T, Liste>
-        where T
-        : src.Library.Interfaces.IHashCode
-        where Liste
-        : List<T>
+    public class SortierAlgorithmen<T>
+        where T : src.Library.Interfaces.IHashCode<T>
     {
         public List<T> Elemente { get; set; }
 
         public T[] SortierteElemente { get; set; }
 
+        public Dictionary<int, List<T>> SortierteElementListen { get; set; }
+
         public SortierAlgorithmen(List<T> elemente)
         {
-            Elemente = elemente;
+            try
+            {
+                Elemente = elemente;
 
-            SortierteElemente = elemente.ToArray();
+                SortierteElemente = elemente.ToArray();
 
-            QuickSort(0, SortierteElemente.Length - 1);
+                QuickSort(0, SortierteElemente.Length - 1);
+
+                int hash = 0;
+
+                SortierteElementListen = new Dictionary<int, List<T>>();
+
+                for (int i = 0; i < SortierteElemente.Length; i++)
+                {
+                    if (i == 0 ||
+                        SortierteElemente[i].HashCode() != hash)
+                    {
+                        hash = SortierteElemente[i].HashCode();
+
+                        SortierteElementListen[hash] = new List<T>();
+                    }
+
+                    SortierteElementListen[hash].Add(SortierteElemente[i]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
         }
 
         public void QuickSort(int links, int rechts)
         {
             if (links < rechts)
             {
-                int teiler = teile(links, rechts);
+                int teiler = Teile(links, rechts);
 
                 QuickSort(links, teiler - 1);
 
@@ -31,41 +54,50 @@
             }
         }
 
-        public int teile(int links, int rechts)
+        public int Teile(int links, int rechts)
         {
             int i = links;
 
             int j = rechts - 1;
 
-            int pivotElementHashCode = SortierteElemente[rechts].GetHashCode();
-
-            while (i < j)
+            try
             {
-                while (i < j &&
-                        SortierteElemente[i].GetHashCode() <= pivotElementHashCode)
+                int pivotElementHashCode = SortierteElemente[rechts].HashCode();
+
+                while (i < j)
                 {
-                    i++;
+                    while (i < j &&
+                            SortierteElemente[i].HashCode() <= pivotElementHashCode)
+                    {
+                        i++;
+                    }
+
+                    while (j > i &&
+                            SortierteElemente[j].HashCode() > pivotElementHashCode)
+                    {
+                        j--;
+                    }
+
+                    if (SortierteElemente[i].HashCode() > SortierteElemente[j].HashCode())
+                    {
+                        Swap(i, j);
+                    }
                 }
 
-                while (j > i &&
-                        SortierteElemente[j].GetHashCode() > pivotElementHashCode)
+                if (SortierteElemente[i].HashCode() > pivotElementHashCode)
                 {
-                    j++;
+                    Swap(i, rechts);
                 }
-
-                if (SortierteElemente[i].GetHashCode() > SortierteElemente[j].GetHashCode())
+                else
                 {
-                    Swap(i, j);
+                    i = rechts;
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("links:" + links + "rechts:" + rechts + "i:" + i + "j:" + j + " SortierteElemente.Length:" + SortierteElemente.Length);
 
-            if (SortierteElemente[i].GetHashCode() > pivotElementHashCode)
-            {
-                Swap(i, rechts);
-            }
-            else
-            {
-                i = rechts;
+                Console.WriteLine(ex.StackTrace);
             }
 
             return i;

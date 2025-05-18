@@ -13,7 +13,9 @@
         Interfaces.IDifferenzMenge<Elemente<T>>,
         Interfaces.IToString,
         Interfaces.ICopy<Elemente<T>>,
+        Library.Interfaces.IHashCode<Elemente<T>>,
         IEquatable<Elemente<T>>,
+        //IEquatable<Element<Elemente<T>>>,
         Interfaces.IPotenzMenge<Elemente<T>>
         where T :
         IEquatable<T>
@@ -27,11 +29,14 @@
             }
         }
 
+        public Func<Elemente<T>, int> HashCodeFunction { get; set; }
+
         public Elemente() : base()
         {
+            HashCodeFunction = (h) => { return h.Kardinalitaet(); };
         }
 
-        public int? Kardinalitaet()
+        public int Kardinalitaet()
         {
             return Count;
         }
@@ -193,6 +198,11 @@
             return copy;
         }
 
+        public int HashCode()
+        {
+            return HashCodeFunction(this);
+        }
+
         public bool Equals(Elemente<T>? other)
         {
             return IstGleich(other);
@@ -202,86 +212,90 @@
         {
             Elemente<Elemente<T>> potenzmenge = new Elemente<Elemente<T>>();
 
-            if (Kardinalitaet == null)
+            int potenzmengenKardinalität = 1;
+
+            foreach (T element in this)
             {
-                return null;
+                potenzmengenKardinalität *= 2;
             }
 
-            for (int kardinalitaet = 0; kardinalitaet <= Count; kardinalitaet++)
+            foreach (T element in this)
             {
-                Console.WriteLine();
-
-                Console.WriteLine("Kardinalitaet: " + kardinalitaet);
-
-                if (kardinalitaet == 0)
-                {
-                    potenzmenge.Add(new Elemente<T>());
-
-                    Console.WriteLine();
-
-                    Console.WriteLine(potenzmenge.ToString());
-
-                    continue;
-                }
-
-                PotenzmengenRekursion(potenzmenge, new Elemente<T>(), 1, kardinalitaet);
-
-                Console.WriteLine();
-
-                Console.WriteLine(potenzmenge.ToString());
+                PotenzmengenRekursion(potenzmenge, new Elemente<T>(), element, potenzmengenKardinalität);
             }
 
             return potenzmenge;
         }
 
-        public void PotenzmengenRekursion(Elemente<Elemente<T>> potenzmenge, Elemente<T> teilmenge, int schleifen, int kardinalitaet)
+        public void PotenzmengenRekursion(Elemente<Elemente<T>> potenzmenge, Elemente<T> teilmenge, T element, int potenzmengenKardinalität)
         {
-            if (schleifen > kardinalitaet)
+            try
             {
-                return;
+                if (teilmenge.Kardinalitaet() <= Kardinalitaet())
+                {
+                    if (!potenzmenge.HatElement(teilmenge))
+                    {
+                        potenzmenge.Add(teilmenge.Copy());
+                    }
+                }
+
+                if (teilmenge.Kardinalitaet() < Kardinalitaet())
+                {
+                    if (!teilmenge.HatElement(element))
+                    {
+                        teilmenge.Add(element);
+                    }
+
+                    if (!potenzmenge.HatElement(teilmenge))
+                    {
+                        potenzmenge.Add(teilmenge.Copy());
+                    }
+                }
+
+                if (teilmenge.Kardinalitaet() < Kardinalitaet() &&
+                    potenzmenge.Kardinalitaet() < potenzmengenKardinalität)
+                {
+                    foreach (T t in this)
+                    {
+                        if (teilmenge.HatElement(t))
+                        {
+                            continue;
+                        }
+
+                        PotenzmengenRekursion(potenzmenge, teilmenge.Copy(), t, potenzmengenKardinalität);
+                    }
+                }
             }
-
-            int index = 1;
-
-            Elemente<T> schleifenTeilmenge = new Elemente<T>();
-
-            foreach (T t in this)
+            catch (Exception ex)
             {
-                if (!schleifenTeilmenge.HatElement(t) &&
-                    index > schleifen)
-                {
-                    schleifenTeilmenge.Add(t);
-                }
-
-                if (!teilmenge.HatElement(t))
-                {
-                    teilmenge.Add(t);
-                }
-
-                AddTeilmenge(potenzmenge, schleifenTeilmenge, t, kardinalitaet);
-
-                AddTeilmenge(potenzmenge, teilmenge, t, kardinalitaet);
-
-                PotenzmengenRekursion(potenzmenge, teilmenge.Copy(), schleifen + 1, kardinalitaet);
-
-                Console.Write('.');
-
-                index++;
+                Console.WriteLine(ex.ToString());
             }
         }
 
-        public void AddTeilmenge(Elemente<Elemente<T>> potenzmenge, Elemente<T> teilmenge, T t, int kardinalitaet)
-        {
-            if (teilmenge.Count.Equals(kardinalitaet))
-            {
-                if (!potenzmenge.HatElement(teilmenge))
-                {
-                    potenzmenge.Add(teilmenge.Copy());
+        //public bool Equals(Element<Elemente<T>>? other)
+        //{
+        //    if (other == null)
+        //    {
+        //        return false;
+        //    }
 
-                }
+        //    foreach (T element in this)
+        //    {
+        //        if (!other.Inhalt.Contains(element))
+        //        {
+        //            return false;
+        //        }
+        //    }
 
-                teilmenge.Remove(t);
-            }
-        }
+        //    foreach (T element in other.Inhalt)
+        //    {
+        //        if (!Contains(element))
+        //        {
+        //            return false;
+        //        }
+        //    }
+
+        //    return true;
+        //}
     }
 }

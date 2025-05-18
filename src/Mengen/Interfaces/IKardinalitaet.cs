@@ -2,6 +2,6 @@
 {
     public interface IKardinalitaet
     {
-        public int? Kardinalitaet();
+        public int Kardinalitaet();
     }
 }
