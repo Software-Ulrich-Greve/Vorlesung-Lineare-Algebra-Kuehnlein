@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Element.cs" />
+    <Compile Remove="N.cs" />
+    <Compile Remove="N0.cs" />
+    <Compile Remove="Q.cs" />
+    <Compile Remove="R.cs" />
+    <Compile Remove="TestSortierElement.cs" />
+    <Compile Remove="Z.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Library\Library.csproj" />
   </ItemGroup>
 
