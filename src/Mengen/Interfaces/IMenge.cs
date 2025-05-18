@@ -17,9 +17,9 @@
             ICopy<IMenge<T>>
         where T : IEquatable<T>
     {
-        public Elemente<T> Elemente { get; set; }
+        public GenerischeMenge<T> Elemente { get; set; }
 
-        public IMenge<T> Initialize(Elemente<T> elemente);
+        public IMenge<T> Initialize(GenerischeMenge<T> elemente);
 
         public void Add(T t);
 

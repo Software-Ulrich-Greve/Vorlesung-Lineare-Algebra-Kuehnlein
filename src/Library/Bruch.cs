@@ -1,4 +1,4 @@
-﻿namespace src.Mengen
+﻿namespace src.Library
 {
     public struct Bruch :
         IEquatable<Bruch>

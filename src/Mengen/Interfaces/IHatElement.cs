@@ -1,7 +1,7 @@
 ﻿namespace src.Mengen.Interfaces
 {
-    public interface IHatElement<T> where T : IEquatable<T>
+    public interface IHatElement<TElement> where TElement : IEquatable<TElement>
     {
-        public bool HatElement(T element);
+        public bool HatElement(TElement element);
     }
 }

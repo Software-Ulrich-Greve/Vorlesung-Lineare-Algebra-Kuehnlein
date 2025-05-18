@@ -1,7 +1,7 @@
 ﻿namespace src.Mengen.Interfaces
 {
-    public interface ILeereMenge<T>
+    public interface ILeereMenge<M>
     {
-        public T LeereMenge { get; }
+        public M LeereMenge { get; }
     }
 }

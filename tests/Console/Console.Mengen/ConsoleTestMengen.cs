@@ -1,25 +1,15 @@
-﻿using Library;
-
-namespace Mengen
+﻿namespace Mengen
 {
     public class ConsoleTestMengen
     {
-        public src.Mengen.Elemente<int>? TestMenge { get; set; }
-
-        public src.Mengen.Elemente<int>? TestTeilMenge0 { get; set; }
-
-        public src.Mengen.Elemente<int>? TestTeilMenge1 { get; set; }
-
-        public src.Mengen.Elemente<int>? TestTeilMenge2 { get; set; }
-
-        public src.Mengen.Elemente<int>? TestTeilMenge3 { get; set; }
+        public src.Mengen.GenerischeMenge<int>? TestMenge { get; set; }
 
         public ConsoleTestMengen()
         {
             try
             {
 
-                TestMenge = new src.Mengen.TestMenge();
+                TestMenge = new src.Mengen.GenerischeMenge<int>();
 
                 TestMenge.Add(1);
                 TestMenge.Add(2);
@@ -27,23 +17,7 @@ namespace Mengen
                 TestMenge.Add(4);
                 TestMenge.Add(5);
 
-                //TestTeilMenge0 = new TestMenge();
-
-                //TestTeilMenge1 = new TestMenge();
-
-                //TestTeilMenge1.Add(1);
-
-                //TestTeilMenge2 = new TestMenge();
-
-                //TestTeilMenge2.Add(1);
-
-                //TestTeilMenge3 = new TestMenge();
-
-                //TestTeilMenge3.Add(1);
-
-                //TestTeilMenge3.Add(2);
-
-                src.Mengen.Elemente<src.Mengen.Elemente<int>>? potenzMenge = TestMenge.PotenzMenge();
+                src.Mengen.GenerischeMenge<src.Mengen.GenerischeMenge<int>>? potenzMenge = TestMenge.PotenzMenge();
 
                 Console.WriteLine();
 
@@ -56,14 +30,14 @@ namespace Mengen
                     return;
                 }
 
-                SortierAlgorithmen<src.Mengen.Elemente<int>> potenzMengenSortierungNachKardinalitaet =
-                    new SortierAlgorithmen<src.Mengen.Elemente<int>>(potenzMenge);
+                src.Library.SortierAlgorithmen<src.Mengen.GenerischeMenge<int>> potenzMengenSortierungNachKardinalitaet =
+                    new src.Library.SortierAlgorithmen<src.Mengen.GenerischeMenge<int>>(potenzMenge);
 
-                src.Mengen.Elemente<src.Mengen.Elemente<int>> sortiertePotenzMenge = new src.Mengen.Elemente<src.Mengen.Elemente<int>>();
+                src.Mengen.GenerischeMenge<src.Mengen.GenerischeMenge<int>> sortiertePotenzMenge = new src.Mengen.GenerischeMenge<src.Mengen.GenerischeMenge<int>>();
 
-                foreach (List<src.Mengen.Elemente<int>> value in potenzMengenSortierungNachKardinalitaet.SortierteElementListen.Values)
+                foreach (List<src.Mengen.GenerischeMenge<int>> value in potenzMengenSortierungNachKardinalitaet.SortierteElementListen.Values)
                 {
-                    foreach (src.Mengen.Elemente<int> element in value)
+                    foreach (src.Mengen.GenerischeMenge<int> element in value)
                     {
                         element.HashCodeFunction = (h) =>
                         {
@@ -78,10 +52,10 @@ namespace Mengen
                         };
                     }
 
-                    SortierAlgorithmen<src.Mengen.Elemente<int>> potenzMengenSortierungNachGewicht =
-                        new SortierAlgorithmen<src.Mengen.Elemente<int>>(value);
+                    src.Library.SortierAlgorithmen<src.Mengen.GenerischeMenge<int>> potenzMengenSortierungNachGewicht =
+                        new src.Library.SortierAlgorithmen<src.Mengen.GenerischeMenge<int>>(value);
 
-                    foreach (src.Mengen.Elemente<int> element in potenzMengenSortierungNachGewicht.SortierteElemente)
+                    foreach (src.Mengen.GenerischeMenge<int> element in potenzMengenSortierungNachGewicht.SortierteElemente)
                     {
                         sortiertePotenzMenge.Add(element);
                     }

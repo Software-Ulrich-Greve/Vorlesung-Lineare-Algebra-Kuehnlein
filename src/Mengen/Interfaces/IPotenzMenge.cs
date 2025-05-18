@@ -2,6 +2,8 @@
 {
     public interface IPotenzMenge<M> where M : IEquatable<M>
     {
-        public Elemente<M>? PotenzMenge();
+        public int KardinalitaetPotenzmenge { get; }
+
+        public GenerischeMenge<M>? PotenzMenge();
     }
 }

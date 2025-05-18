@@ -1,7 +1,7 @@
 ﻿namespace src.Mengen.Interfaces
 {
-    public interface IElementMitIndex<T> where T : IEquatable<T>
+    public interface IElementMitIndex<TElement> where TElement : IEquatable<TElement>
     {
-        public T ElementMitIndex(int index);
+        public TElement ElementMitIndex(int index);
     }
 }

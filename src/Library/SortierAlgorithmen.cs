@@ -1,7 +1,7 @@
-﻿namespace Library
+﻿namespace src.Library
 {
     public class SortierAlgorithmen<T>
-        where T : src.Library.Interfaces.IHashCode<T>
+        where T : Interfaces.IHashCode<T>
     {
         public List<T> Elemente { get; set; }
 
