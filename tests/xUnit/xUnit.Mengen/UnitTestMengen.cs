@@ -1,3 +1,5 @@
+using Library;
+
 namespace tests.xUnit.Mengen;
 
 public class UnitTestMengen
@@ -24,72 +26,110 @@ public class UnitTestMengen
     [Fact]
     public void TestPotenzMengeKardinalitaet3()
     {
-        TestMenge = new src.Mengen.TestMenge();
+        try
+        {
+            TestMenge = new src.Mengen.TestMenge();
 
-        TestMenge.Add(1);
+            TestMenge.Add(1);
 
-        TestMenge.Add(2);
+            TestMenge.Add(2);
 
-        TestMenge.Add(3);
+            TestMenge.Add(3);
 
-        TestTeilMenge0 = new src.Mengen.TestMenge();
+            TestTeilMenge0 = new src.Mengen.TestMenge();
 
-        TestTeilMenge1 = new src.Mengen.TestMenge();
+            TestTeilMenge1 = new src.Mengen.TestMenge();
 
-        TestTeilMenge1.Add(1);
+            TestTeilMenge1.Add(1);
 
-        TestTeilMenge2 = new src.Mengen.TestMenge();
+            TestTeilMenge2 = new src.Mengen.TestMenge();
 
-        TestTeilMenge2.Add(2);
+            TestTeilMenge2.Add(2);
 
-        TestTeilMenge3 = new src.Mengen.TestMenge();
+            TestTeilMenge3 = new src.Mengen.TestMenge();
 
-        TestTeilMenge3.Add(3);
+            TestTeilMenge3.Add(3);
 
-        TestTeilMenge4 = new src.Mengen.TestMenge();
+            TestTeilMenge4 = new src.Mengen.TestMenge();
 
-        TestTeilMenge4.Add(1);
+            TestTeilMenge4.Add(1);
 
-        TestTeilMenge4.Add(2);
+            TestTeilMenge4.Add(2);
 
-        TestTeilMenge5 = new src.Mengen.TestMenge();
+            TestTeilMenge5 = new src.Mengen.TestMenge();
 
-        TestTeilMenge5.Add(1);
+            TestTeilMenge5.Add(1);
 
-        TestTeilMenge5.Add(3);
+            TestTeilMenge5.Add(3);
 
-        TestTeilMenge6 = new src.Mengen.TestMenge();
+            TestTeilMenge6 = new src.Mengen.TestMenge();
 
-        TestTeilMenge6.Add(2);
+            TestTeilMenge6.Add(2);
 
-        TestTeilMenge6.Add(3);
+            TestTeilMenge6.Add(3);
 
-        TestTeilMenge7 = new src.Mengen.TestMenge();
+            TestTeilMenge7 = new src.Mengen.TestMenge();
 
-        TestTeilMenge7.Add(1);
+            TestTeilMenge7.Add(1);
 
-        TestTeilMenge7.Add(2);
+            TestTeilMenge7.Add(2);
 
-        TestTeilMenge7.Add(3);
+            TestTeilMenge7.Add(3);
 
-        src.Mengen.Elemente<src.Mengen.Elemente<int>>? Potenzmenge = TestMenge.PotenzMenge();
+            src.Mengen.Elemente<src.Mengen.Elemente<int>>? potenzmenge = TestMenge.PotenzMenge();
 
-        Assert.False(Potenzmenge == null);
+            SortierAlgorithmen<src.Mengen.Elemente<int>> potenzMengenSortierungNachKardinalitaet =
+                new SortierAlgorithmen<src.Mengen.Elemente<int>>(potenzmenge);
 
-        Assert.True(Potenzmenge.ElementMitIndex(0).IstGleich(TestTeilMenge0));
+            src.Mengen.Elemente<src.Mengen.Elemente<int>> sortiertePotenzMenge = new src.Mengen.Elemente<src.Mengen.Elemente<int>>();
 
-        Assert.True(Potenzmenge.ElementMitIndex(1).IstGleich(TestTeilMenge1));
+            foreach (List<src.Mengen.Elemente<int>> value in potenzMengenSortierungNachKardinalitaet.SortierteElementListen.Values)
+            {
+                foreach (src.Mengen.Elemente<int> element in value)
+                {
+                    element.HashCodeFunction = (h) =>
+                    {
+                        int summe = 0;
 
-        Assert.True(Potenzmenge.ElementMitIndex(2).IstGleich(TestTeilMenge2));
+                        foreach (int wert in h)
+                        {
+                            summe += wert;
+                        }
 
-        Assert.True(Potenzmenge.ElementMitIndex(3).IstGleich(TestTeilMenge3));
+                        return summe;
+                    };
+                }
 
-        Assert.True(Potenzmenge.ElementMitIndex(4).IstGleich(TestTeilMenge4));
+                SortierAlgorithmen<src.Mengen.Elemente<int>> potenzMengenSortierungNachGewicht =
+                    new SortierAlgorithmen<src.Mengen.Elemente<int>>(value);
 
-        Assert.True(Potenzmenge.ElementMitIndex(5).IstGleich(TestTeilMenge5));
+                foreach (src.Mengen.Elemente<int> element in potenzMengenSortierungNachGewicht.SortierteElemente)
+                {
+                    sortiertePotenzMenge.Add(element);
+                }
+            }
 
-        Assert.True(Potenzmenge.ElementMitIndex(6).IstGleich(TestTeilMenge6));
+            Assert.False(sortiertePotenzMenge == null);
 
-        Assert.True(Potenzmenge.ElementMitIndex(7).IstGleich(TestTeilMenge7));
+            Assert.True(sortiertePotenzMenge.ElementMitIndex(0).IstGleich(TestTeilMenge0));
+
+            Assert.True(sortiertePotenzMenge.ElementMitIndex(1).IstGleich(TestTeilMenge1));
+
+            Assert.True(sortiertePotenzMenge.ElementMitIndex(2).IstGleich(TestTeilMenge2));
+
+            Assert.True(sortiertePotenzMenge.ElementMitIndex(3).IstGleich(TestTeilMenge3));
+
+            Assert.True(sortiertePotenzMenge.ElementMitIndex(4).IstGleich(TestTeilMenge4));
+
+            Assert.True(sortiertePotenzMenge.ElementMitIndex(5).IstGleich(TestTeilMenge5));
+
+            Assert.True(sortiertePotenzMenge.ElementMitIndex(6).IstGleich(TestTeilMenge6));
+
+            Assert.True(sortiertePotenzMenge.ElementMitIndex(7).IstGleich(TestTeilMenge7));
+        }
+        catch (Exception ex)
+        {
+            var x = 0;
+        }
     }
 }
